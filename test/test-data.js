@@ -17,6 +17,12 @@ let bookingsSampleData = [
         roomNumber: 5
     },
     {
+        id: "8frrg24i7z55h96tn",
+        userID: 15,
+        date: "2022/06/07",
+        roomNumber: 10
+    },
+    {
         id: "5fwrgu4i7k55hl6to",
         userID: 46,
         date: "2022/02/22",
@@ -32,6 +38,14 @@ let roomsSampleData = [
         bedSize: "queen",
         numBeds: 2,
         costPerNight: 340.17
+    },
+    {
+        number: 10,
+        roomType: "single room",
+        bidet: true,
+        bedSize: "queen",
+        numBeds: 2,
+        costPerNight: 500.17
     },
     {
         number: 6,
