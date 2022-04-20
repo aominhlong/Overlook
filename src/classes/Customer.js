@@ -1,15 +1,16 @@
 class Customer {
-    constructor(data, roomsSampleData) {
+    constructor(data, roomsSampleData, bookingsSampleData) {
         this.name = data.name
         this.id = data.id
         this.roomsBooked = []
         this.totalSpent = 0
         this.filteredRoomsAvailable = []
         this.roomsAvailable = roomsSampleData
+        this.roomsUnavailable = bookingsSampleData
     }
 
-    findRoomsBooked(bookingData) {
-        bookingData.forEach((room) => {
+    findRoomsBooked() {
+        this.roomsUnavailable.forEach((room) => {
             if (this.id === room.userID) {
                 this.roomsBooked.push(room)
             } else {
@@ -42,19 +43,21 @@ class Customer {
         })
     }
 
-    filterRoomsByDate(date, bookingsSampleData) {
-        let newBookings = []
-        bookingsSampleData.forEach((booking) => {
-            if (booking.date !== date) {
-                array.push(booking)
-            }
+    filterRoomsByDate(date) {
+        //2022/08/13
+        let filterBookings = this.roomsUnavailable.filter((booking) => {
+            return booking.date === date
+        })
+
+        this.roomsAvailable.forEach((room) => {
+            filterBookings.forEach((booking) => {
+                if (room.number !== booking.roomNumber) {
+                    this.filteredRoomsAvailable.push(room)
+                }
+            })
         })
         
-        //filter bookings first
-        //iterate through filtered and match room number
-        //splice
 
-        console.log(array)
     }
 
 }

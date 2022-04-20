@@ -11,8 +11,8 @@ describe('Customer', () => {
     let rooms;
 
     beforeEach(() => {
-        customer1 = new Customer(customerData[0], roomsSampleData);
-        customer2 = new Customer(customerData[1], roomsSampleData);
+        customer1 = new Customer(customerData[0], roomsSampleData, bookingsSampleData);
+        customer2 = new Customer(customerData[1], roomsSampleData, bookingsSampleData);
         bookings = bookingsSampleData;
         rooms = roomsSampleData;
     })
@@ -37,8 +37,8 @@ describe('Customer', () => {
     })
 
     it('Should know the rooms that they booked', () => {
-        customer1.findRoomsBooked(bookingsSampleData)
-        customer2.findRoomsBooked(bookingsSampleData)
+        customer1.findRoomsBooked()
+        customer2.findRoomsBooked()
 
         expect(customer1.roomsBooked).to.deep.equal([])
         expect(customer2.roomsBooked).to.deep.equal([
@@ -95,9 +95,27 @@ describe('Customer', () => {
         ])
     })
 
-    it('Should filter a room by date', () => {
-        customer2.filterRoomsByDate("2022/01/17", bookingsSampleData)
+    it.only('Should filter a room by date', () => {
+        customer2.filterRoomsByDate('2022/08/13')
 
+        expect(customer2.filteredRoomsAvailable).to.deep.equal([
+            {
+                number: 5,
+                roomType: 'single room',
+                bidet: true,
+                bedSize: 'queen',
+                numBeds: 2,
+                costPerNight: 340.17
+              },
+              {
+                number: 13,
+                roomType: 'junior suite',
+                bidet: true,
+                bedSize: 'queen',
+                numBeds: 1,
+                costPerNight: 397.02
+              }
+        ])
 
     })
 
