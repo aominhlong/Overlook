@@ -19,7 +19,7 @@ let bookingsSampleData = [
     {
         id: "8frrg24i7z55h96tn",
         userID: 15,
-        date: "2022/06/07",
+        date: '2022/08/13',
         roomNumber: 10
     },
     {
@@ -48,7 +48,7 @@ let roomsSampleData = [
         costPerNight: 500.17
     },
     {
-        number: 6,
+        number: 13,
         roomType: "junior suite",
         bidet: true,
         bedSize: "queen",
