@@ -1,6 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
-import { userCustomerData, bookingsSampleData, roomsSampleData } from './test-data'
+import { customerData, bookingsSampleData, roomsSampleData } from './test-data'
 import Customer from '../src/classes/Customer'
 
 describe('Customer', () => {
@@ -11,8 +11,8 @@ describe('Customer', () => {
     let rooms;
 
     beforeEach(() => {
-        customer1 = new Customer(userCustomerData[0]);
-        customer2 = new Customer(userCustomerData[1]);
+        customer1 = new Customer(customerData[0], roomsSampleData);
+        customer2 = new Customer(customerData[1], roomsSampleData);
         bookings = bookingsSampleData;
         rooms = roomsSampleData;
     })
@@ -69,12 +69,38 @@ describe('Customer', () => {
         customer1.findMoneySpent(roomsSampleData)
         customer2.findMoneySpent(roomsSampleData)
 
-        console.log(customer1)
-        console.log(customer2)
-
         expect(customer1.totalSpent).to.equal(0)
         expect(customer2.totalSpent).to.equal(840.34)
     })
+
+    it('Should be able to filter the rooms available', () => {
+        customer2.filterRoomsByType('single room')
+        expect(customer2.filteredRoomsAvailable).to.deep.equal([
+        {
+            number: 5,
+            roomType: "single room",
+            bidet: true,
+            bedSize: "queen",
+            numBeds: 2,
+            costPerNight: 340.17
+        },
+        {
+            number: 10,
+            roomType: "single room",
+            bidet: true,
+            bedSize: "queen",
+            numBeds: 2,
+            costPerNight: 500.17
+        }
+        ])
+    })
+
+    it('Should filter a room by date', () => {
+        customer2.filterRoomsByDate("2022/01/17", bookingsSampleData)
+
+
+    })
+
 
 
 
