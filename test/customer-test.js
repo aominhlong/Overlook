@@ -1,6 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
-import { userCustomerData, bookingsSampleData, roomsSampleData } from './test-data'
+import { customerData, bookingsSampleData, roomsSampleData } from './test-data'
 import Customer from '../src/classes/Customer'
 
 describe('Customer', () => {
@@ -11,8 +11,8 @@ describe('Customer', () => {
     let rooms;
 
     beforeEach(() => {
-        customer1 = new Customer(userCustomerData[0]);
-        customer2 = new Customer(userCustomerData[1]);
+        customer1 = new Customer(customerData[0]);
+        customer2 = new Customer(customerData[1]);
         bookings = bookingsSampleData;
         rooms = roomsSampleData;
     })
@@ -68,9 +68,6 @@ describe('Customer', () => {
 
         customer1.findMoneySpent(roomsSampleData)
         customer2.findMoneySpent(roomsSampleData)
-
-        console.log(customer1)
-        console.log(customer2)
 
         expect(customer1.totalSpent).to.equal(0)
         expect(customer2.totalSpent).to.equal(840.34)

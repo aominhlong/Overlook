@@ -1,4 +1,4 @@
-let userCustomerData = [
+let customerData = [
     {
         id: 1,
         name: "Leatha Ullrich"
@@ -57,4 +57,4 @@ let roomsSampleData = [
     }
 ]
 
-export { userCustomerData, bookingsSampleData, roomsSampleData }
+export { customerData, bookingsSampleData, roomsSampleData }
