@@ -51,7 +51,7 @@ describe('Customer', () => {
               {
                 id: '8frrg24i7z55h96tn',
                 userID: 15,
-                date: '2022/06/07',
+                date: '2022/08/13',
                 roomNumber: 10
               }
         ])
@@ -95,7 +95,7 @@ describe('Customer', () => {
         ])
     })
 
-    it.only('Should filter a room by date', () => {
+    it('Should filter a room by date', () => {
         customer2.filterRoomsByDate('2022/08/13')
 
         expect(customer2.filteredRoomsAvailable).to.deep.equal([
