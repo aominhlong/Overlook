@@ -16,10 +16,6 @@ describe('Hotel', () => {
         expect(Customer).to.be.a('function');
     })
 
-    it('Should have a list of rooms available', () => {
-        expect(hotel.roomsAvailable).to.deep.equal(roomsSampleData)
-    })
-
     it('Should have a list of all the customers', () => {
         expect(hotel.customerList).to.deep.equal(customerData)
     })
@@ -28,27 +24,7 @@ describe('Hotel', () => {
         expect(hotel.bookedRooms).to.deep.equal(bookingsSampleData)
     })
 
-    it('Should be able to filter the rooms available', () => {
-        hotel.filterRooms('single room')
-        expect(hotel.filteredRooms).to.deep.equal([
-        {
-            number: 5,
-            roomType: "single room",
-            bidet: true,
-            bedSize: "queen",
-            numBeds: 2,
-            costPerNight: 340.17
-        },
-        {
-            number: 10,
-            roomType: "single room",
-            bidet: true,
-            bedSize: "queen",
-            numBeds: 2,
-            costPerNight: 500.17
-        }
-        ])
-    })
+    
 
 
 
