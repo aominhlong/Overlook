@@ -1,3 +1,71 @@
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  /* background-image: url(https://images.trvl-media.com/hotels/12000000/11620000/11615100/11615006/416e4a41_z.jpg); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  height: 100vh;
+  width: 100%;
+}
+
+.title-container{
+  border: 2px solid green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+
+.title{
+  font-size: 5em;
+  border: 2px solid green;
+}
+
+.slang{
+  font-size: 2em;
+}
+
+.top-half{
+  border: 2px solid red;
+  display: flex;
+  height: 60%;
+
+}
+
+.user-booking-area{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid blue;
+  width: 10%;
+}
+
+.user-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center
+  ;
+}
+
+.user{
+  border: 2px solid purple;
+}
+
+/* ---------------- */
+
+.bottom-half{
+  border: 2px solid orange;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.booking-area{
+  border: 2px solid green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 60%;
 }

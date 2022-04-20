@@ -50,7 +50,9 @@ class Customer {
             }
         })
         
-
+        //filter bookings first
+        //iterate through filtered and match room number
+        //splice
 
         console.log(array)
     }
