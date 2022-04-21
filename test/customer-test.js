@@ -2,19 +2,20 @@ import chai from 'chai';
 const expect = chai.expect;
 import { customerData, bookingsSampleData, roomsSampleData } from './test-data'
 import Customer from '../src/classes/Customer'
+import Hotel from '../src/classes/Hotel'
 
 describe('Customer', () => {
 
     let customer1;
     let customer2;
     let bookings;
-    let rooms;
+    let hotel;
 
     beforeEach(() => {
-        customer1 = new Customer(customerData[0], roomsSampleData, bookingsSampleData);
-        customer2 = new Customer(customerData[1], roomsSampleData, bookingsSampleData);
+        hotel = new Hotel (roomsSampleData, customerData, bookingsSampleData)
+        customer1 = new Customer(customerData[0], hotel);
+        customer2 = new Customer(customerData[1], hotel);
         bookings = bookingsSampleData;
-        rooms = roomsSampleData;
     })
 
     it('Should be a function', () => {
@@ -66,59 +67,12 @@ describe('Customer', () => {
         customer1.findRoomsBooked(bookingsSampleData)
         customer2.findRoomsBooked(bookingsSampleData)
 
-        customer1.findMoneySpent(roomsSampleData)
-        customer2.findMoneySpent(roomsSampleData)
+        customer1.findMoneySpent()
+        customer2.findMoneySpent()
 
         expect(customer1.totalSpent).to.equal(0)
         expect(customer2.totalSpent).to.equal(840.34)
     })
-
-    it('Should be able to filter the rooms available', () => {
-        customer2.filterRoomsByType('single room')
-        expect(customer2.filteredRoomsAvailable).to.deep.equal([
-        {
-            number: 5,
-            roomType: "single room",
-            bidet: true,
-            bedSize: "queen",
-            numBeds: 2,
-            costPerNight: 340.17
-        },
-        {
-            number: 10,
-            roomType: "single room",
-            bidet: true,
-            bedSize: "queen",
-            numBeds: 2,
-            costPerNight: 500.17
-        }
-        ])
-    })
-
-    it('Should filter a room by date', () => {
-        customer2.filterRoomsByDate('2022/08/13')
-
-        expect(customer2.filteredRoomsAvailable).to.deep.equal([
-            {
-                number: 5,
-                roomType: 'single room',
-                bidet: true,
-                bedSize: 'queen',
-                numBeds: 2,
-                costPerNight: 340.17
-              },
-              {
-                number: 13,
-                roomType: 'junior suite',
-                bidet: true,
-                bedSize: 'queen',
-                numBeds: 1,
-                costPerNight: 397.02
-              }
-        ])
-
-    })
-
 
 
 
