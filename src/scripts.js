@@ -1,4 +1,8 @@
 // This is the JavaScript entry file - your code begins here
+import { specificUserData, allCustomersData, allRoomsData, allBookingsData } from './apiCalls'
+import Hotel from './classes/Hotel'
+import Customer from './classes/Customer'
+
 const topHalf = document.querySelector('.top-half')
 const bottomHalf = document.querySelector('.bottom-half')
 const currentBookings = document.querySelector('.current-bookings')
@@ -12,8 +16,62 @@ const loginPage = document.querySelector('.login-page')
 const dashboardTitle = document.querySelector('.title')
 
 
+let allData = []
+let hotel;
+let customer;
+let bookingsData;
+let roomsData;
 
-// *****On Window load*****
+
+const getData = (id) => {
+  return Promise.all([
+    specificUserData(id),
+    allCustomersData(),
+    allRoomsData(),
+    allBookingsData()
+  ]).then(data => {
+    data.forEach((data) => {
+      allData.push(data)
+    })
+    console.log(allData)
+    bookingsData = allData[3].bookings
+    roomsData = allData[2].rooms
+    hotel = new Hotel(allData[2], allData[1], allData[3])
+    customer = new Customer(allData[0], hotel)
+    populateBookingArea()
+  })
+}
+
+const userName = document.querySelector('.customer-name')
+const customerId = document.querySelector('.customer-id')
+const moneySpent = document.querySelector('.money-spent')
+const pastBooked = document.querySelector('.pastBooked')
+
+const populateBookingArea = () => {
+  customer.findRoomsBooked(bookingsData)
+  customer.findMoneySpent(roomsData)
+  console.log(customer)
+  userName.innerText = customer.name
+  customerId.innerText = `id: ${customer.id}`
+  moneySpent.innerText = `Total Spent: $${customer.totalSpent.toFixed(2)}`
+  
+  customer.roomsBooked.forEach((roomBooked) => {
+    pastBooked.innerHTML += `
+    <section class="roomBooked">
+    date: ${roomBooked.date}
+    <br>
+    room Number: ${roomBooked.roomNumber}
+    </section>`
+  })
+}
+
+//On login button click, invoke function to fetch
+//all data, pass in argument as user number
+
+
+
+
+// ***** ON WINDOW LOAD *****
 window.addEventListener('load', () => {
     hideAll([topHalf, bottomHalf])
 })
@@ -32,17 +90,23 @@ loginBtn.addEventListener('click', (event) => {
     event.preventDefault()
     hideAll([loginPage])
     showAll([topHalf, bottomHalf])
+    getData()
 })
 
 
+
+
+
+
 // ***** DASHBOARD *****
-
-
 const hideAll = (array) => {
   array.forEach((element) => {
     element.classList.add("hidden")
   })
 }
+
+
+
 
 const showAll = (array) => {
     array.forEach((element) => {

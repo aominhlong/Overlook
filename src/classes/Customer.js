@@ -9,8 +9,8 @@ class Customer {
         this.bookedRooms = hotel.roomsUnavailable
     }
 
-    findRoomsBooked() {
-        this.bookedRooms.forEach((room) => {
+    findRoomsBooked(bookedRooms) {
+        bookedRooms.forEach((room) => {
             if (this.id === room.userID) {
                 this.roomsBooked.push(room)
             } else {
@@ -19,10 +19,10 @@ class Customer {
         })   
     }
 
-    findMoneySpent() {
+    findMoneySpent(roomData) {
         let roomDetail = [];
         this.roomsBooked.forEach((roomBooked) => {
-            this.roomsAvailable.forEach((room) => {
+            roomData.forEach((room) => {
                 if (roomBooked.roomNumber === room.number) {
                     roomDetail.push(room)
                 }

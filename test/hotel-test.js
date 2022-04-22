@@ -16,8 +16,6 @@ describe('Hotel', () => {
         expect(Hotel).to.be.a('function');
     })
 
-    
-
     it('Should have a list of all the customers', () => {
         expect(hotel.customerList).to.deep.equal(customerData)
     })
