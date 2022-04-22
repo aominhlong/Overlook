@@ -14,7 +14,7 @@ const checkDateBtn = document.querySelector(".check-date-btn")
 const loginBtn = document.querySelector('.login-btn')
 const loginPage = document.querySelector('.login-page')
 const dashboardTitle = document.querySelector('.title')
-
+const username = document.querySelector('input[type="text"]')
 
 let allData = []
 let hotel;
@@ -87,13 +87,23 @@ const checkDate = () => {
 }
 
 loginBtn.addEventListener('click', (event) => {
+  // console.log('user', username.value)
     event.preventDefault()
     hideAll([loginPage])
     showAll([topHalf, bottomHalf])
-    getData()
+    getData(parseInt(findUserLoginId()[0]))
+    // findUserLoginId()
+    // console.log(findUserLoginId()[0])
 })
 
-
+let findUserLoginId = () => {
+  let userLogin = username.value
+  let matchNum = userLogin.match(/\d+/)
+  if (matchNum) {
+    console.log('hi')
+    return matchNum
+  }
+}
 
 
 
