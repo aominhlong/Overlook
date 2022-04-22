@@ -38,8 +38,8 @@ describe('Customer', () => {
     })
 
     it('Should know the rooms that they booked', () => {
-        customer1.findRoomsBooked()
-        customer2.findRoomsBooked()
+        customer1.findRoomsBooked(bookingsSampleData)
+        customer2.findRoomsBooked(bookingsSampleData)
 
         expect(customer1.roomsBooked).to.deep.equal([])
         expect(customer2.roomsBooked).to.deep.equal([
@@ -67,8 +67,8 @@ describe('Customer', () => {
         customer1.findRoomsBooked(bookingsSampleData)
         customer2.findRoomsBooked(bookingsSampleData)
 
-        customer1.findMoneySpent()
-        customer2.findMoneySpent()
+        customer1.findMoneySpent(roomsSampleData)
+        customer2.findMoneySpent(roomsSampleData)
 
         expect(customer1.totalSpent).to.equal(0)
         expect(customer2.totalSpent).to.equal(840.34)
