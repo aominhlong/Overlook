@@ -7,10 +7,39 @@
   <title>The Burrow</title>
 </head>
 <body>
+
+  <!-- LOGIN DISPLAY -->
+  <section class="login-page">
+    <section class="greeting">
+      <h1 class="login-title">The Burrow</h1>
+      <p class="slogan">The home away from home</p>
+    </section>
+    <section class="login-capsule">
+      <h2 class="login">Login</h2>
+      <form class="login-area">
+        <input class="username" id="username" type="text" placeholder="Username">
+          <label for="username" class="hidden">Username Input Field</label>
+        <input class="password" id="password" type="text" placeholder="Password">
+          <label for="password" class="hidden">Password Input Field</label>
+          <button class="login-btn">Login</button>
+        </form>
+        <p class="login-error hidden">Login not found. Please try again</p>
+    </section>
+  </section>
+
+  <!-- DASHBOARD DISPLAY -->
   <section class="top-half">
-    <section class="title-container">
-      <h1 class="title">Welcome to the Burrow</h1>
-      <p class="slang">A Home in Paradise</p>
+    <section class="title-user-container">
+      <section class="title-container">
+        <h1 class="title">Welcome to the Burrow</h1>
+        <section class="bookings">
+          <div class="pastBooked">here</div>
+          <div class="currentBooking">here</div>
+        </section>
+      </section>
+      <section class="current-bookings">
+        <!--current bookings go here-->
+      </section>
     </section>
     <section class="user-booking-area">
       <section class="user-info">
