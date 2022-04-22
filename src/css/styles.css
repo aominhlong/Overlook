@@ -108,6 +108,13 @@ body {
   margin: 0;
   border: 2px solid green;
   width: 40%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  gap: 15px;
+}
+
+.roomBooked {
+  border: 2px solid blue;
 }
 
 .slang{

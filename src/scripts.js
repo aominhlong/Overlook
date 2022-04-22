@@ -44,6 +44,8 @@ const getData = (id) => {
 
 const userName = document.querySelector('.customer-name')
 const customerId = document.querySelector('.customer-id')
+const moneySpent = document.querySelector('.money-spent')
+const pastBooked = document.querySelector('.pastBooked')
 
 const populateBookingArea = () => {
   customer.findRoomsBooked(bookingsData)
@@ -51,6 +53,16 @@ const populateBookingArea = () => {
   console.log(customer)
   userName.innerText = customer.name
   customerId.innerText = `id: ${customer.id}`
+  moneySpent.innerText = `Total Spent: $${customer.totalSpent.toFixed(2)}`
+  
+  customer.roomsBooked.forEach((roomBooked) => {
+    pastBooked.innerHTML += `
+    <section class="roomBooked">
+    date: ${roomBooked.date}
+    <br>
+    room Number: ${roomBooked.roomNumber}
+    </section>`
+  })
 }
 
 //On login button click, invoke function to fetch
