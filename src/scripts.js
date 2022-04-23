@@ -7,7 +7,7 @@ const topHalf = document.querySelector('.top-half')
 const bottomHalf = document.querySelector('.bottom-half')
 const currentBookings = document.querySelector('.current-bookings')
 const userArea = document.querySelector('.user-info')
-const date = document.querySelector('input[type="date"]')
+const calendar = document.querySelector('.calendar')
 const checkDateBtn = document.querySelector(".check-date-btn")
 
 // **login page selectors**
@@ -15,6 +15,10 @@ const loginBtn = document.querySelector('.login-btn')
 const loginPage = document.querySelector('.login-page')
 const dashboardTitle = document.querySelector('.title')
 const username = document.querySelector('input[type="text"]')
+
+// **filter dates**
+const selectRoomType = document.querySelector('#type-selection')
+const date = document.querySelector('input[type="date"]')
 
 let allData = []
 let hotel;
@@ -39,9 +43,8 @@ const getData = (id) => {
     customers = allData[1].customers
     findUserLoginId(customers)
     hotel = new Hotel(roomsData, allData[1], bookingsData)
-    console.log('hotel', hotel)
-    console.log(allData)
     customer = new Customer(allData[0], hotel)
+    console.log('during fetch', customer)
     populateBookingArea()
   })
 }
@@ -77,24 +80,72 @@ const populateBookingArea = () => {
 
 // ***** ON WINDOW LOAD *****
 window.addEventListener('load', () => {
-    hideAll([topHalf, bottomHalf])
+    // hideAll([topHalf, bottomHalf, roomsAvailablePage])
+    
+    hideAll([loginPage, roomsAvailablePage])
+    showAll([topHalf, bottomHalf])
+    getData(parseInt(15))
 })
 
-const selectRoomType = document.querySelector('#type-selection')
 
+const roomsAvailableSection = document.querySelector('.room-available-container')
+const roomsAvailablePage = document.querySelector('.rooms-available-page')
 
 // ***** LOGIN PAGE *****
 checkDateBtn.addEventListener('click', (event) => {
   event.preventDefault()
-    hotel.roomsAvailable = roomsData
+  console.log('date', date.value)
     hotel.filterRoomsByDate(date.value)
-
     if (selectRoomType.value === 'All options') {
-      console.log('only by date', hotel.filterRoomsByDate(date.value))
-    } else {
-      console.log('by both', hotel.filterRoomsByBoth(date.value, selectRoomType.value))
-    }
-  })
+      hotel.filterRoomsByDate(date.value).forEach((room) => {
+        roomsAvailableSection.innerHTML += `
+        <section class="room-available">
+          <section class="room">
+            Room Number: ${room.number}
+            <br>
+            Room Type: ${room.roomType}
+            <br>
+            Bed Size: ${room.bedSize}
+            <br>
+            Beds: ${room.numBeds}
+            <br>
+            Price Per Night: ${room.costPerNight}
+          </section>
+          <button class="button" id="${room.number}">Book Now</button>
+        </section>
+        `
+      })
+    hideAll([topHalf, bottomHalf])
+  } else {
+    hotel.filterRoomsByDate(date.value, selectRoomType.value).forEach((room) => {
+      roomsAvailableSection.innerHTML += `
+      <section class="room-available">
+        <section class="room">
+          Room Number: ${room.number}
+          <br>
+          Room Type: ${room.roomType}
+          <br>
+          Bed Size: ${room.bedSize}
+          <br>
+          Beds: ${room.numBeds}
+          <br>
+          Price Per Night: ${room.costPerNight}
+        </section>
+        <button class="button" id="${room.number}">Book Now</button>
+      </section>
+      `
+    })
+  }
+  showAll([roomsAvailablePage])
+})
+
+
+const goHome = document.querySelector('.go-home')
+goHome.addEventListener('click', () => {
+  showAll([topHalf, bottomHalf])
+  hideAll([roomsAvailablePage])
+})
+
 
 
 loginBtn.addEventListener('click', (event) => {
@@ -106,24 +157,13 @@ loginBtn.addEventListener('click', (event) => {
 })
 
 
-const roomTypeDropDown = document.querySelector('.type')
-
-
 let findUserLoginId = (customer) => {
-  console.log('cust', customer)
-
   let userLogin = username.value
   let matchNum = userLogin.match(/\d+/)
   if (matchNum) {
     return matchNum
   }
-  // if (matchNum && userLogin.includes(`customer`)
-  // && userLogin.length >= 9 && userLogin.length <= 10) {
-  //   return matchNum
-  // }
 }
-
-
 // FIX LOGIN
 
 
@@ -143,7 +183,42 @@ const showAll = (array) => {
 }
 
 
-// ****** SEARCH FOR DATE ******
+
+//Post request
+roomsAvailablePage.addEventListener('click', (event) => {
+  if (event.target.className === 'button') {
+    postRequest(event)
+  }
+})
+
+const allBtns = document.querySelectorAll('.button')
+
+
+const postRequest = (event) => {
+
+  let postDate = date.value.split('-').join('/')
+
+  fetch(`http://localhost:3001/api/v1/bookings`, {
+    method: 'POST',
+    body: JSON.stringify(
+      { "userID": parseInt(customerId.innerText.match(/\d+/)[0]), 
+      "date": postDate, 
+      "roomNumber": parseInt(event.target.id) }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(refetch => { 
+    pastBooked.innerHTML = ''
+    getData(parseInt(customerId.innerText.match(/\d+/)[0]))
+    showAll([topHalf, bottomHalf])
+    hideAll([roomsAvailablePage])
+  })
+}
+
+
+
 
 
 

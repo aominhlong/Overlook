@@ -9,14 +9,14 @@ body {
 
 /* *****Login Page***** */
 .login-page{
-  border: 2px solid green;
+  /* border: 2px solid green; */
   height: 100%;
   width: 100%;
   margin: 0;
 }
 
 .greeting{
-  border: 2px solid purple;
+  /* border: 2px solid purple; */
   height: 40%;
   display: flex;
   flex-direction: column;
@@ -25,18 +25,18 @@ body {
 }
 
 .login-title{
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
   font-size: 100px;
   text-align: center;
 }
 
 .slogan{
-  border: 2px solid red;
+  /* border: 2px solid red; */
   font-size: 30px;
 }
 
 .login-capsule{
-  border: 2px solid red;
+  /* border: 2px solid red; */
   height: 60%;
   display: flex;
   flex-direction: column;
@@ -46,10 +46,10 @@ body {
 }
 
 .login-area{
+  /* border: 2px solid purple; */
   gap: 2%;
   height: 30%;
   width: 80%;
-  border: 2px solid purple;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,35 +68,61 @@ body {
 }
 
 .login-error{
-  color: red;
+  /* color: red; */
 }
 
 
 
 
 /* ******Main Dashboard****** */
-.title-user-container,
-.title-container{
-  border: 2px solid green;
+/* .title-user-container */
+
+
+.title-user-container{
+  /* border: 1px solid grey; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 90%;
+  /* height: 60%; */
+}
+
+.pastBooked,
+.currentBooking{
+  border: 1px solid grey;
 }
 
 .title-container{
+  /* border: 2px solid purple; */
   height: 100%;
 }
 
+.title-money-spent-container{
+  border: 2px solid red;
+}
+
 .title{
+  /* border: 2px solid red; */
   /* color: rgb(255,254,255); */
   font-size: 5em;
-  border: 2px solid green;
+}
+
+.mini-title-capsule{
+  /* border: 2px solid red; */
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.money-spent{
+  /* border: 2px solid green; */
+  text-align: center;
 }
 
 .bookings{
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
   width: 100%;
   display: flex;
   max-height: 25%;
@@ -105,8 +131,9 @@ body {
 
 .pastBooked,
 .currentBooking{
+  /* border: 2px solid green; */
+  text-align: center;
   margin: 0;
-  border: 2px solid green;
   width: 40%;
   overflow-y: auto;
   scrollbar-width: thin;
@@ -114,16 +141,13 @@ body {
 }
 
 .roomBooked {
-  border: 2px solid blue;
-}
-
-.slang{
-  /* color: rgb(255,254,255); */
-  font-size: 2em;
+  border: 1px solid rgb(160, 160, 160);
+  margin: 3px;
+  justify-content: space-between;
 }
 
 .top-half{
-  border: 2px solid red;
+  /* border: 2px solid red; */
   display: flex;
   height: 60%;
 
@@ -132,7 +156,7 @@ body {
 .user-booking-area{
   display: flex;
   flex-direction: column;
-  border: 2px solid blue;
+  border: 1px solid grey;
   width: 10%;
 }
 
@@ -147,6 +171,7 @@ body {
 }
 
 .my-bookings{
+  border: 2px solid orange;
   height: 8%;
 }
 
@@ -154,7 +179,7 @@ body {
 /* ---------------- */
 
 .bottom-half{
-  border: 2px solid orange;
+  /* border: 2px solid orange; */
   height: 40%;
   display: flex;
   justify-content: center;
@@ -172,13 +197,40 @@ body {
 }
 
 .book-for{
-  border: 2px solid red;
+  /* border: 2px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 5%;
 }
 
+/* Rooms available page */
+.rooms-available-page{
+  /* border: 2px solid red; */
+  margin: 0;
+}
+
+.rooms-available-title{
+  border: 2px solid green;
+  height: 40%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.room-available-container{
+  border: 2px solid blue;
+}
+
+.room-available{
+  /* border: 2px solid orange; */
+  margin: 2em;
+}
+
+#type-selection{
+  margin: 1em;
+}
 
 .hidden {
   display: none;
