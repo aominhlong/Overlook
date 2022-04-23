@@ -80,15 +80,21 @@ window.addEventListener('load', () => {
     hideAll([topHalf, bottomHalf])
 })
 
+const selectRoomType = document.querySelector('#type-selection')
+
 
 // ***** LOGIN PAGE *****
 checkDateBtn.addEventListener('click', (event) => {
   event.preventDefault()
     hotel.roomsAvailable = roomsData
     hotel.filterRoomsByDate(date.value)
-    console.log('only by date', hotel.filterRoomsByDate(date.value))
-    console.log('by both', hotel.filterRoomsByBoth(date.value, 'suite'))
-})
+
+    if (selectRoomType.value === 'All options') {
+      console.log('only by date', hotel.filterRoomsByDate(date.value))
+    } else {
+      console.log('by both', hotel.filterRoomsByBoth(date.value, selectRoomType.value))
+    }
+  })
 
 
 loginBtn.addEventListener('click', (event) => {
@@ -111,7 +117,13 @@ let findUserLoginId = (customer) => {
   if (matchNum) {
     return matchNum
   }
+  // if (matchNum && userLogin.includes(`customer`)
+  // && userLogin.length >= 9 && userLogin.length <= 10) {
+  //   return matchNum
+  // }
 }
+
+
 // FIX LOGIN
 
 
