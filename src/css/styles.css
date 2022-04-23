@@ -151,7 +151,6 @@ body {
 }
 
 
-
 /* ---------------- */
 
 .bottom-half{
@@ -160,6 +159,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* gap: 20px; */
 }
 
 .booking-area{
@@ -169,6 +169,14 @@ body {
   align-items: center;
   width: 80%;
   height: 60%;
+}
+
+.book-for{
+  border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5%;
 }
 
 

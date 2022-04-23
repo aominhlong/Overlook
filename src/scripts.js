@@ -21,7 +21,7 @@ let hotel;
 let customer;
 let bookingsData;
 let roomsData;
-
+let customers;
 
 const getData = (id) => {
   return Promise.all([
@@ -30,13 +30,17 @@ const getData = (id) => {
     allRoomsData(),
     allBookingsData()
   ]).then(data => {
-    data.forEach((data) => {
-      allData.push(data)
+    data.forEach((item) => {
+      allData.push(item)
     })
     console.log(allData)
     bookingsData = allData[3].bookings
     roomsData = allData[2].rooms
-    hotel = new Hotel(allData[2], allData[1], allData[3])
+    customers = allData[1].customers
+    findUserLoginId(customers)
+    hotel = new Hotel(roomsData, allData[1], bookingsData)
+    console.log('hotel', hotel)
+    console.log(allData)
     customer = new Customer(allData[0], hotel)
     populateBookingArea()
   })
@@ -50,7 +54,7 @@ const pastBooked = document.querySelector('.pastBooked')
 const populateBookingArea = () => {
   customer.findRoomsBooked(bookingsData)
   customer.findMoneySpent(roomsData)
-  console.log(customer)
+  // console.log(customer)
   userName.innerText = customer.name
   customerId.innerText = `id: ${customer.id}`
   moneySpent.innerText = `Total Spent: $${customer.totalSpent.toFixed(2)}`
@@ -78,32 +82,37 @@ window.addEventListener('load', () => {
 
 
 // ***** LOGIN PAGE *****
-checkDateBtn.addEventListener('click', () => {
-    checkDate()
+checkDateBtn.addEventListener('click', (event) => {
+  event.preventDefault()
+    hotel.roomsAvailable = roomsData
+    hotel.filterRoomsByDate(date.value)
+    console.log('only by date', hotel.filterRoomsByDate(date.value))
+    console.log('by both', hotel.filterRoomsByBoth(date.value, 'suite'))
 })
 
-const checkDate = () => {
-    console.log(date.value)
-}
 
 loginBtn.addEventListener('click', (event) => {
-  // console.log('user', username.value)
     event.preventDefault()
     hideAll([loginPage])
     showAll([topHalf, bottomHalf])
     getData(parseInt(findUserLoginId()[0]))
-    // findUserLoginId()
-    // console.log(findUserLoginId()[0])
+    findUserLoginId()
 })
 
-let findUserLoginId = () => {
+
+const roomTypeDropDown = document.querySelector('.type')
+
+
+let findUserLoginId = (customer) => {
+  console.log('cust', customer)
+
   let userLogin = username.value
   let matchNum = userLogin.match(/\d+/)
   if (matchNum) {
-    console.log('hi')
     return matchNum
   }
 }
+// FIX LOGIN
 
 
 
@@ -115,16 +124,14 @@ const hideAll = (array) => {
   })
 }
 
-
-
-
 const showAll = (array) => {
-    array.forEach((element) => {
-      element.classList.remove("hidden")
-    })
-  }
+  array.forEach((element) => {
+    element.classList.remove("hidden")
+  })
+}
 
 
+// ****** SEARCH FOR DATE ******
 
 
 

@@ -17,9 +17,9 @@
     <section class="login-capsule">
       <h2 class="login">Login</h2>
       <form class="login-area">
-        <input class="username" id="username" type="text" placeholder="Username">
+        <input class="username" id="username" type="text" placeholder="Username" minlength=9 maxlength=10>
           <label for="username" class="hidden">Username Input Field</label>
-        <input class="password" id="password" type="text" placeholder="Password">
+        <input class="password" id="password" type="text" placeholder="Password" minlength=12 maxlength=12>
           <label for="password" class="hidden">Password Input Field</label>
           <button class="login-btn">Login</button>
         </form>
@@ -49,12 +49,22 @@
 
   <section class="bottom-half">
     <section class="booking-area">
-      <p>Search For</p>
+      <section class="book-for">
+        <p>Book for:</p>
+      </section>
       <section class="booking-input-container">
         <input type="date" name="" value="" id="check-date">
       </section>
-      <button class="check-date-btn">Check the date</button>
-      
+      <form class="room-type">
+        <select name="type">
+          <option id="all">All options</option>
+          <option id="residential suite">residential suite</option>
+          <option id="suite">suite</option>
+          <option id="junior suite">junior suite</option>
+          <option id="single room">single room</option>
+        </select>
+        <button class="check-date-btn">Check the date</button>
+      </form>
     </section>
   </section>
   

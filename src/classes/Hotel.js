@@ -1,9 +1,9 @@
 class Hotel {
-    constructor(roomsSampleData, customerData, bookingsSampleData) {
+    constructor(roomsData, customerData, bookingsData) {
         this.customerList = customerData;
-        this.roomsAvailable = roomsSampleData
-        this.roomsUnavailable = bookingsSampleData
-        this.filteredRoomsAvailable = []
+        this.roomsAvailable = roomsData
+        this.roomsUnavailable = bookingsData
+        this.filteredRooms;
     }
     
     filterRoomsByType(roomType) {
@@ -16,21 +16,46 @@ class Hotel {
 
     filterRoomsByDate(date) {
         //2022/08/13
-        let filterBookings = this.roomsUnavailable.filter((booking) => {
-            return booking.date === date
-        })
+        let filteredRoomsAvailable = []
 
-        this.roomsAvailable.forEach((room) => {
+        this.roomsAvailable.forEach((room) => filteredRoomsAvailable.push(room))
+        let filterBookings = this.roomsUnavailable.filter((booking) => {
+
+            return booking.date === date.split('-').join('/')
+        })
+ 
+        filteredRoomsAvailable.forEach((room, index) => {
             filterBookings.forEach((booking) => {
-                if (room.number !== booking.roomNumber) {
-                    this.filteredRoomsAvailable.push(room)
+                if (room.number === booking.roomNumber) {
+
+                    filteredRoomsAvailable.splice(index, 1)
                 }
             })
         })
-        if (this.filteredRoomsAvailable.length === 0) {
-            return 'We are so sorry. It looks like there are no rooms currently available on this date.'
-        }
+        return filteredRoomsAvailable
     }
 
+    filterRoomsByBoth(date, roomType) {
+        let filteredRoomsAvailable = []
+        let finalFilterArray = []
+        this.roomsAvailable.forEach((room) => filteredRoomsAvailable.push(room))
+        let filterBookings = this.roomsUnavailable.filter((booking) => {
+
+            return booking.date === date.split('-').join('/')
+        })
+ 
+        filteredRoomsAvailable.forEach((room, index) => {
+            filterBookings.forEach((booking) => {
+                if (room.number === booking.roomNumber) {
+                    filteredRoomsAvailable.splice(index, 1)
+                }
+            })
+        })
+
+        return filteredRoomsAvailable.filter((room) => {
+            return room.roomType === roomType
+        })
+       
+    }    
 }
 export default Hotel
