@@ -17,6 +17,9 @@ const moneySpent = document.querySelector('.money-spent')
 const pastBooked = document.querySelector('.pastBooked')
 const currentBooking = document.querySelector('.currentBooking')
 const noBookingParagraph = document.querySelector('.no-bookings')
+const cal = document.querySelector('#calen')
+const roomsAvailable = document.querySelector('.room-available')
+const goHome = document.querySelector('.go-home')
 
 // **login page selectors**
 const loginBtn = document.querySelector('.login-btn')
@@ -75,10 +78,6 @@ const populateBookingArea = () => {
     room Number: ${roomBooked.roomNumber}
     </section>`
   
-  
-  
-  
-  
     if(roomBooked.date >= setCurrentDay('/')) {
       console.log('hi')
       currentBooking.innerHTML += `
@@ -88,12 +87,7 @@ const populateBookingArea = () => {
         room Number: ${roomBooked.roomNumber}
         </section>`
     }
-  
-  
-  
-  
   })
-
 }
 
 
@@ -101,7 +95,6 @@ const populateBookingArea = () => {
 // ***** ON WINDOW LOAD *****
 window.addEventListener('load', () => {
     hideAll([topHalf, bottomHalf, roomsAvailablePage])
-    
 })
 
 const test = document.querySelector('.error-no-date-chosen')
@@ -163,14 +156,12 @@ checkDateBtn.addEventListener('click', (event) => {
 })
 
 
-const goHome = document.querySelector('.go-home')
+
 goHome.addEventListener('click', () => {
   showAll([topHalf, bottomHalf])
   hideAll([roomsAvailablePage])
 })
 
-const cal = document.querySelector('#calen')
-const roomsAvailable = document.querySelector('.room-available')
 
 loginBtn.addEventListener('click', (event) => {
     event.preventDefault()
@@ -178,10 +169,8 @@ loginBtn.addEventListener('click', (event) => {
     showAll([topHalf, bottomHalf])
     getData(parseInt(findUserLoginId()[0]))
     findUserLoginId()
-    console.log(cal)
-    console.log(cal.value)
-    console.log('here', setCurrentDay('/'))
-    // cal.value = setCurrentDay('/')
+
+
     cal.min = setCurrentDay('/')
 
     let test2 = document.querySelector('.test')
