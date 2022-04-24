@@ -12,8 +12,6 @@ class Customer {
         bookedRooms.forEach((room) => {
             if (this.id === room.userID) {
                 this.roomsBooked.push(room)
-            } else {
-                return 'You do not have a booking with us.'
             }
         })   
     }

@@ -7,6 +7,7 @@
   <title>The Burrow</title>
 </head>
 <body>
+  <!-- background="https://images.trvl-media.com/hotels/12000000/11620000/11615100/11615006/416e4a41_z.jpg" -->
 
   <!-- LOGIN DISPLAY -->
   <section class="login-page">
@@ -19,7 +20,7 @@
       <form class="login-area">
         <input class="username" id="username" type="text" placeholder="Username" minlength=9 maxlength=10>
           <label for="username" class="hidden">Username Input Field</label>
-        <input class="password" id="password" type="text" placeholder="Password" minlength=12 maxlength=12>
+        <input class="password" id="password" type="text" placeholder="Password">
           <label for="password" class="hidden">Password Input Field</label>
           <button class="login-btn">Login</button>
         </form>
@@ -39,12 +40,12 @@
           </section>
  
         <section class="bookings">
-          <div class="pastBooked"></div>
-          <div class="currentBooking">
+          <section class="pastBooked"></section>
+          <section class="currentBooking">
             <div class="no-bookings">
-              You have no current bookings
+              <p class="test">You have no current bookings</p>
             </div>
-          </div>
+          </section>
         </section>
       </section>
     </section>
@@ -59,13 +60,11 @@
 
   <section class="bottom-half">
     <section class="booking-area">
-      <!-- <section class="book-for">
-        <p>Book for:</p>
-      </section> -->
       <section class="booking-input-container">
         <label for="checkDate" class="calendar">Choose Your Date:</label>
-        <input type="date" name="" value="" id="checkDate">
+        <input id="calen" type="date" name="" value="" min="" id="checkDate">
       </section>
+      <p class="error-no-date-chosen hidden">Please choose a date</p>
       <form class="room-type">
         <select name="type" id="type-selection">
           <option id="all">All options</option>
@@ -84,7 +83,6 @@
   <h1 class="rooms-available-title">Rooms Available</h1>
   <button class="go-home">Go Home</button>
   <section class="room-available-container"></section>
-  <button class="go-home">Go Home</button>
 </section>
 
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->

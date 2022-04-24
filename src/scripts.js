@@ -15,12 +15,18 @@ const userName = document.querySelector('.customer-name')
 const customerId = document.querySelector('.customer-id')
 const moneySpent = document.querySelector('.money-spent')
 const pastBooked = document.querySelector('.pastBooked')
+const currentBooking = document.querySelector('.currentBooking')
+const noBookingParagraph = document.querySelector('.no-bookings')
+const cal = document.querySelector('#calen')
+const roomsAvailable = document.querySelector('.room-available')
+const goHome = document.querySelector('.go-home')
 
 // **login page selectors**
 const loginBtn = document.querySelector('.login-btn')
 const loginPage = document.querySelector('.login-page')
 const dashboardTitle = document.querySelector('.title')
 const username = document.querySelector('input[type="text"]')
+const password = document.querySelector('.password')
 
 // **filter dates**
 const selectRoomType = document.querySelector('#type-selection')
@@ -63,7 +69,7 @@ const populateBookingArea = () => {
   userName.innerText = customer.name
   customerId.innerText = `id: ${customer.id}`
   moneySpent.innerText = `Total Spent: $${customer.totalSpent.toFixed(2)}`
-  
+  console.log('first', customer.roomsBooked)
   customer.roomsBooked.forEach((roomBooked) => {
     pastBooked.innerHTML += `
     <section class="roomBooked">
@@ -71,8 +77,19 @@ const populateBookingArea = () => {
     <br>
     room Number: ${roomBooked.roomNumber}
     </section>`
+  
+    if(roomBooked.date >= setCurrentDay('/')) {
+      console.log('hi')
+      currentBooking.innerHTML += `
+        <section class="roomBooked">
+        date: ${roomBooked.date}
+        <br>
+        room Number: ${roomBooked.roomNumber}
+        </section>`
+    }
   })
 }
+
 
 
 // ***** ON WINDOW LOAD *****
@@ -80,10 +97,20 @@ window.addEventListener('load', () => {
     hideAll([topHalf, bottomHalf, roomsAvailablePage])
 })
 
+const test = document.querySelector('.error-no-date-chosen')
 
 // ***** LOGIN PAGE *****
 checkDateBtn.addEventListener('click', (event) => {
   event.preventDefault()
+
+  if (cal.value === '') {
+    showAll([test])
+    setTimeout(() => {
+      hideAll([test])
+    }, 3000)
+    return
+  }
+
   roomsAvailableSection.innerHTML = ''
     if (selectRoomType.value === 'All options') {
       hotel.filterRoomsByDate(date.value).forEach((room) => {
@@ -129,7 +156,7 @@ checkDateBtn.addEventListener('click', (event) => {
 })
 
 
-const goHome = document.querySelector('.go-home')
+
 goHome.addEventListener('click', () => {
   showAll([topHalf, bottomHalf])
   hideAll([roomsAvailablePage])
@@ -142,11 +169,24 @@ loginBtn.addEventListener('click', (event) => {
     showAll([topHalf, bottomHalf])
     getData(parseInt(findUserLoginId()[0]))
     findUserLoginId()
+
+
+    cal.min = setCurrentDay('/')
+
+    let test2 = document.querySelector('.test')
+
+    if(currentBooking.contains(roomsAvailable)) {
+      noBookingParagraph.removeChild(noBookingParagraph.firstChild)
+    }
 })
 
 
-let findUserLoginId = (customer) => {
+let findUserLoginId = (customers) => {
+  
   let userLogin = username.value
+  let passwordLogin = password.value
+  console.log('hi', userLogin)
+  console.log('password', passwordLogin)
   let matchNum = userLogin.match(/\d+/)
   if (matchNum) {
     return matchNum
@@ -178,6 +218,7 @@ roomsAvailablePage.addEventListener('click', (event) => {
 })
 
 
+
 const postRequest = (event) => {
   let postDate = date.value.split('-').join('/')
 
@@ -197,14 +238,40 @@ const postRequest = (event) => {
     .then(data => {
       allData[3] = data
       bookingsData = allData[3].bookings
+      customer.findRoomsBooked(bookingsData)
     })
   })
   .then(show => {
     getData(parseInt(customerId.innerText.match(/\d+/)[0]))
     showAll([topHalf, bottomHalf])
-    hideAll([roomsAvailablePage])
+    hideAll([roomsAvailablePage, noBookingParagraph])
+    
+    currentBooking.innerHTML = ''
+    
   })
+  
 }
+
+
+
+
+const setCurrentDay = (sp) => {
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth()+1; //As January is 0.
+  let yyyy = today.getFullYear();
+  
+  if(dd<10) dd='0'+dd;
+  if(mm<10) mm='0'+mm;
+  return (yyyy+sp+mm+sp+dd);
+  };
+
+
+
+
+
+
+
 
 
 // Do not delete or rename this file ********
@@ -216,5 +283,5 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
-
+import './images/hotel.png'
 
