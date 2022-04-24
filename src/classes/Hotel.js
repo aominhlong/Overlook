@@ -4,6 +4,7 @@ class Hotel {
         this.roomsAvailable = roomsData
         this.roomsUnavailable = bookingsData
         this.filteredRooms;
+        this.unbookedRooms = []
     }
     
     filterRoomsByType(roomType) {
@@ -17,33 +18,37 @@ class Hotel {
     filterRoomsByDate(date) {
         //2022/08/13
         let filteredRoomsAvailable = []
+        this.unbookedRooms = []
+        // console.log(this.roomsUnavailable)   --> changes when booked --> not the problem
 
         this.roomsAvailable.forEach((room) => filteredRoomsAvailable.push(room))
-        let filterBookings = this.roomsUnavailable.filter((booking) => {
 
+        let filterBookings = this.roomsUnavailable.filter((booking) => {
             return booking.date === date.split('-').join('/')
         })
- 
-        filteredRoomsAvailable.forEach((room, index) => {
-            filterBookings.forEach((booking) => {
-                if (room.number === booking.roomNumber) {
 
+        filterBookings.forEach((booking) => {
+            filteredRoomsAvailable.forEach((room, index) => {
+                if (parseInt(room.number) === parseInt(booking.roomNumber)) {
+                    this.unbookedRooms.push(room)
                     filteredRoomsAvailable.splice(index, 1)
                 }
             })
         })
+        console.log('unbooked', this.unbookedRooms)
+        
+        // console.log('filterRoomsAvailable', filteredRoomsAvailable)
         return filteredRoomsAvailable
     }
 
     filterRoomsByBoth(date, roomType) {
         let filteredRoomsAvailable = []
-        let finalFilterArray = []
         this.roomsAvailable.forEach((room) => filteredRoomsAvailable.push(room))
         let filterBookings = this.roomsUnavailable.filter((booking) => {
 
             return booking.date === date.split('-').join('/')
         })
- 
+        // console.log('rooms unavailable second', this.roomsUnavailable)
         filteredRoomsAvailable.forEach((room, index) => {
             filterBookings.forEach((booking) => {
                 if (room.number === booking.roomNumber) {

@@ -47,6 +47,7 @@ const getData = (id) => {
     hotel = new Hotel(roomsData, allData[1], bookingsData)
     customer = new Customer(allData[0], hotel)
     populateBookingArea()
+    console.log(allData)
   })
 }
 
@@ -81,11 +82,11 @@ const populateBookingArea = () => {
 
 // ***** ON WINDOW LOAD *****
 window.addEventListener('load', () => {
-    // hideAll([topHalf, bottomHalf, roomsAvailablePage])
+    hideAll([topHalf, bottomHalf, roomsAvailablePage])
     
-    hideAll([loginPage, roomsAvailablePage])
-    showAll([topHalf, bottomHalf])
-    getData(parseInt(15))
+    // hideAll([loginPage, roomsAvailablePage])
+    // showAll([topHalf, bottomHalf])
+    // getData(parseInt(15))
 })
 
 
@@ -95,8 +96,9 @@ const roomsAvailablePage = document.querySelector('.rooms-available-page')
 // ***** LOGIN PAGE *****
 checkDateBtn.addEventListener('click', (event) => {
   event.preventDefault()
+  roomsAvailableSection.innerHTML = ''
   console.log('date', date.value)
-    hotel.filterRoomsByDate(date.value)
+    // hotel.filterRoomsByDate(date.value)
     if (selectRoomType.value === 'All options') {
       hotel.filterRoomsByDate(date.value).forEach((room) => {
         roomsAvailableSection.innerHTML += `
@@ -192,12 +194,6 @@ roomsAvailablePage.addEventListener('click', (event) => {
   }
 })
 
-const allBtns = document.querySelectorAll('.button')
-
-const refetch = () => {
-  allBookingsData()
-  .then(data => console.log('here', data))
-  }
 
 const postRequest = (event) => {
 
@@ -216,17 +212,20 @@ const postRequest = (event) => {
   .then(response => response.json())
   .then(refetch  => {
     allBookingsData()
-    .then(data => allData[3] = data)
+    .then(data => {
+      allData[3] = data
+      bookingsData = allData[3].bookings
+    })
   })
   .then(show => {
-    getData(parseInt(event.target.id))
+    getData(parseInt(customerId.innerText.match(/\d+/)[0]))
     showAll([topHalf, bottomHalf])
     hideAll([roomsAvailablePage])
+    // title.innerText = "Booking confirmed. Enjoy your next stay!"
   })
 }
 
-
-
+const title = document.querySelector('.title')
 
 
 
