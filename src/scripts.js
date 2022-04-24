@@ -66,7 +66,7 @@ const populateBookingArea = () => {
   userName.innerText = customer.name
   customerId.innerText = `id: ${customer.id}`
   moneySpent.innerText = `Total Spent: $${customer.totalSpent.toFixed(2)}`
-  
+  console.log('first', customer.roomsBooked)
   customer.roomsBooked.forEach((roomBooked) => {
     pastBooked.innerHTML += `
     <section class="roomBooked">
@@ -74,19 +74,50 @@ const populateBookingArea = () => {
     <br>
     room Number: ${roomBooked.roomNumber}
     </section>`
+  
+  
+  
+  
+  
+    if(roomBooked.date >= setCurrentDay('/')) {
+      console.log('hi')
+      currentBooking.innerHTML += `
+        <section class="roomBooked">
+        date: ${roomBooked.date}
+        <br>
+        room Number: ${roomBooked.roomNumber}
+        </section>`
+    }
+  
+  
+  
+  
   })
+
 }
+
 
 
 // ***** ON WINDOW LOAD *****
 window.addEventListener('load', () => {
     hideAll([topHalf, bottomHalf, roomsAvailablePage])
+    
 })
 
+const test = document.querySelector('.error-no-date-chosen')
 
 // ***** LOGIN PAGE *****
 checkDateBtn.addEventListener('click', (event) => {
   event.preventDefault()
+
+  if (cal.value === '') {
+    showAll([test])
+    setTimeout(() => {
+      hideAll([test])
+    }, 3000)
+    return
+  }
+
   roomsAvailableSection.innerHTML = ''
     if (selectRoomType.value === 'All options') {
       hotel.filterRoomsByDate(date.value).forEach((room) => {
@@ -138,6 +169,8 @@ goHome.addEventListener('click', () => {
   hideAll([roomsAvailablePage])
 })
 
+const cal = document.querySelector('#calen')
+const roomsAvailable = document.querySelector('.room-available')
 
 loginBtn.addEventListener('click', (event) => {
     event.preventDefault()
@@ -145,6 +178,17 @@ loginBtn.addEventListener('click', (event) => {
     showAll([topHalf, bottomHalf])
     getData(parseInt(findUserLoginId()[0]))
     findUserLoginId()
+    console.log(cal)
+    console.log(cal.value)
+    console.log('here', setCurrentDay('/'))
+    // cal.value = setCurrentDay('/')
+    cal.min = setCurrentDay('/')
+
+    let test2 = document.querySelector('.test')
+
+    if(currentBooking.contains(roomsAvailable)) {
+      noBookingParagraph.removeChild(noBookingParagraph.firstChild)
+    }
 })
 
 
@@ -205,6 +249,7 @@ const postRequest = (event) => {
     .then(data => {
       allData[3] = data
       bookingsData = allData[3].bookings
+      customer.findRoomsBooked(bookingsData)
     })
   })
   .then(show => {
@@ -212,16 +257,32 @@ const postRequest = (event) => {
     showAll([topHalf, bottomHalf])
     hideAll([roomsAvailablePage, noBookingParagraph])
     
-    let bookedRoom = customer.roomsBooked.pop()
-    currentBooking.innerHTML += `
-    <section class="roomBooked">
-    date: ${bookedRoom.date}
-    <br>
-    room Number: ${bookedRoom.roomNumber}
-    </section>`
+    currentBooking.innerHTML = ''
+    
   })
   
 }
+
+
+
+
+const setCurrentDay = (sp) => {
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth()+1; //As January is 0.
+  let yyyy = today.getFullYear();
+  
+  if(dd<10) dd='0'+dd;
+  if(mm<10) mm='0'+mm;
+  return (yyyy+sp+mm+sp+dd);
+  };
+
+
+
+
+
+
+
 
 
 // Do not delete or rename this file ********

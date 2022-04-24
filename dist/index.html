@@ -20,7 +20,7 @@
       <form class="login-area">
         <input class="username" id="username" type="text" placeholder="Username" minlength=9 maxlength=10>
           <label for="username" class="hidden">Username Input Field</label>
-        <input class="password" id="password" type="text" placeholder="Password" minlength=12 maxlength=12>
+        <input class="password" id="password" type="text" placeholder="Password">
           <label for="password" class="hidden">Password Input Field</label>
           <button class="login-btn">Login</button>
         </form>
@@ -43,7 +43,7 @@
           <section class="pastBooked"></section>
           <section class="currentBooking">
             <div class="no-bookings">
-              <p>You have no current bookings</p>
+              <p class="test">You have no current bookings</p>
             </div>
           </section>
         </section>
@@ -60,13 +60,11 @@
 
   <section class="bottom-half">
     <section class="booking-area">
-      <!-- <section class="book-for">
-        <p>Book for:</p>
-      </section> -->
       <section class="booking-input-container">
         <label for="checkDate" class="calendar">Choose Your Date:</label>
-        <input type="date" name="" value="" id="checkDate">
+        <input id="calen" type="date" name="" value="" min="" id="checkDate">
       </section>
+      <p class="error-no-date-chosen hidden">Please choose a date</p>
       <form class="room-type">
         <select name="type" id="type-selection">
           <option id="all">All options</option>
