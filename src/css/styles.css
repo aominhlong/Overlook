@@ -75,8 +75,6 @@ body {
 
 
 /* ******Main Dashboard****** */
-/* .title-user-container */
-
 
 .title-user-container{
   /* border: 1px solid grey; */
@@ -85,13 +83,9 @@ body {
   align-items: center;
   justify-content: center;
   width: 90%;
-  /* height: 60%; */
 }
 
-.pastBooked,
-.currentBooking{
-  border: 1px solid grey;
-}
+
 
 .title-container{
   /* border: 2px solid purple; */
@@ -125,19 +119,26 @@ body {
   /* border: 2px solid blue; */
   width: 100%;
   display: flex;
-  max-height: 25%;
+  max-height: 35%;
   justify-content: space-between;
 }
 
 .pastBooked,
 .currentBooking{
-  /* border: 2px solid green; */
+  border: 1px solid grey;
   text-align: center;
   margin: 0;
   width: 40%;
   overflow-y: auto;
   scrollbar-width: thin;
-  gap: 15px;
+}
+
+.no-bookings{
+  height: 95%;
+  color:rgb(160, 160, 160);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .roomBooked {

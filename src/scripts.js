@@ -33,18 +33,19 @@ const getData = (id) => {
     allCustomersData(),
     allRoomsData(),
     allBookingsData()
-  ]).then(data => {
+  ])
+  .then(data => {
     data.forEach((item) => {
       allData.push(item)
     })
-    console.log(allData)
+  })
+  .then(getData => {
     bookingsData = allData[3].bookings
     roomsData = allData[2].rooms
     customers = allData[1].customers
     findUserLoginId(customers)
     hotel = new Hotel(roomsData, allData[1], bookingsData)
     customer = new Customer(allData[0], hotel)
-    console.log('during fetch', customer)
     populateBookingArea()
   })
 }
@@ -193,6 +194,10 @@ roomsAvailablePage.addEventListener('click', (event) => {
 
 const allBtns = document.querySelectorAll('.button')
 
+const refetch = () => {
+  allBookingsData()
+  .then(data => console.log('here', data))
+  }
 
 const postRequest = (event) => {
 
@@ -209,9 +214,12 @@ const postRequest = (event) => {
     }
   })
   .then(response => response.json())
-  .then(refetch => { 
-    pastBooked.innerHTML = ''
-    getData(parseInt(customerId.innerText.match(/\d+/)[0]))
+  .then(refetch  => {
+    allBookingsData()
+    .then(data => allData[3] = data)
+  })
+  .then(show => {
+    getData(parseInt(event.target.id))
     showAll([topHalf, bottomHalf])
     hideAll([roomsAvailablePage])
   })
@@ -235,9 +243,7 @@ const postRequest = (event) => {
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 
-
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
-
 
 console.log('This is the JavaScript entry file - your code begins here.');
