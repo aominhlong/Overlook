@@ -16,10 +16,8 @@ class Hotel {
     }
 
     filterRoomsByDate(date) {
-        //2022/08/13
         let filteredRoomsAvailable = []
         this.unbookedRooms = []
-        // console.log(this.roomsUnavailable)   --> changes when booked --> not the problem
 
         this.roomsAvailable.forEach((room) => filteredRoomsAvailable.push(room))
 
@@ -35,9 +33,6 @@ class Hotel {
                 }
             })
         })
-        console.log('unbooked', this.unbookedRooms)
-        
-        // console.log('filterRoomsAvailable', filteredRoomsAvailable)
         return filteredRoomsAvailable
     }
 
@@ -45,10 +40,9 @@ class Hotel {
         let filteredRoomsAvailable = []
         this.roomsAvailable.forEach((room) => filteredRoomsAvailable.push(room))
         let filterBookings = this.roomsUnavailable.filter((booking) => {
-
             return booking.date === date.split('-').join('/')
         })
-        // console.log('rooms unavailable second', this.roomsUnavailable)
+
         filteredRoomsAvailable.forEach((room, index) => {
             filterBookings.forEach((booking) => {
                 if (room.number === booking.roomNumber) {
@@ -60,7 +54,6 @@ class Hotel {
         return filteredRoomsAvailable.filter((room) => {
             return room.roomType === roomType
         })
-       
     }    
 }
 export default Hotel

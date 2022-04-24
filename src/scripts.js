@@ -47,7 +47,6 @@ const getData = (id) => {
     hotel = new Hotel(roomsData, allData[1], bookingsData)
     customer = new Customer(allData[0], hotel)
     populateBookingArea()
-    console.log(allData)
   })
 }
 
@@ -59,7 +58,6 @@ const pastBooked = document.querySelector('.pastBooked')
 const populateBookingArea = () => {
   customer.findRoomsBooked(bookingsData)
   customer.findMoneySpent(roomsData)
-  // console.log(customer)
   userName.innerText = customer.name
   customerId.innerText = `id: ${customer.id}`
   moneySpent.innerText = `Total Spent: $${customer.totalSpent.toFixed(2)}`
@@ -83,10 +81,6 @@ const populateBookingArea = () => {
 // ***** ON WINDOW LOAD *****
 window.addEventListener('load', () => {
     hideAll([topHalf, bottomHalf, roomsAvailablePage])
-    
-    // hideAll([loginPage, roomsAvailablePage])
-    // showAll([topHalf, bottomHalf])
-    // getData(parseInt(15))
 })
 
 
@@ -97,8 +91,6 @@ const roomsAvailablePage = document.querySelector('.rooms-available-page')
 checkDateBtn.addEventListener('click', (event) => {
   event.preventDefault()
   roomsAvailableSection.innerHTML = ''
-  console.log('date', date.value)
-    // hotel.filterRoomsByDate(date.value)
     if (selectRoomType.value === 'All options') {
       hotel.filterRoomsByDate(date.value).forEach((room) => {
         roomsAvailableSection.innerHTML += `
@@ -196,7 +188,6 @@ roomsAvailablePage.addEventListener('click', (event) => {
 
 
 const postRequest = (event) => {
-
   let postDate = date.value.split('-').join('/')
 
   fetch(`http://localhost:3001/api/v1/bookings`, {
@@ -245,4 +236,4 @@ import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 
-console.log('This is the JavaScript entry file - your code begins here.');
+
