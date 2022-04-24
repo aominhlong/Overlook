@@ -15,12 +15,15 @@ const userName = document.querySelector('.customer-name')
 const customerId = document.querySelector('.customer-id')
 const moneySpent = document.querySelector('.money-spent')
 const pastBooked = document.querySelector('.pastBooked')
+const currentBooking = document.querySelector('.currentBooking')
+const noBookingParagraph = document.querySelector('.no-bookings')
 
 // **login page selectors**
 const loginBtn = document.querySelector('.login-btn')
 const loginPage = document.querySelector('.login-page')
 const dashboardTitle = document.querySelector('.title')
 const username = document.querySelector('input[type="text"]')
+const password = document.querySelector('.password')
 
 // **filter dates**
 const selectRoomType = document.querySelector('#type-selection')
@@ -145,8 +148,12 @@ loginBtn.addEventListener('click', (event) => {
 })
 
 
-let findUserLoginId = (customer) => {
+let findUserLoginId = (customers) => {
+  
   let userLogin = username.value
+  let passwordLogin = password.value
+  console.log('hi', userLogin)
+  console.log('password', passwordLogin)
   let matchNum = userLogin.match(/\d+/)
   if (matchNum) {
     return matchNum
@@ -178,6 +185,7 @@ roomsAvailablePage.addEventListener('click', (event) => {
 })
 
 
+
 const postRequest = (event) => {
   let postDate = date.value.split('-').join('/')
 
@@ -202,8 +210,17 @@ const postRequest = (event) => {
   .then(show => {
     getData(parseInt(customerId.innerText.match(/\d+/)[0]))
     showAll([topHalf, bottomHalf])
-    hideAll([roomsAvailablePage])
+    hideAll([roomsAvailablePage, noBookingParagraph])
+    
+    let bookedRoom = customer.roomsBooked.pop()
+    currentBooking.innerHTML += `
+    <section class="roomBooked">
+    date: ${bookedRoom.date}
+    <br>
+    room Number: ${bookedRoom.roomNumber}
+    </section>`
   })
+  
 }
 
 
@@ -216,5 +233,5 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
-
+import './images/hotel.png'
 

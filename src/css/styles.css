@@ -208,6 +208,9 @@ body {
 /* Rooms available page */
 .rooms-available-page{
   /* border: 2px solid red; */
+  height: 90%;
+  overflow-y: auto;
+  scrollbar-width: thin;
   margin: 0;
 }
 
@@ -222,6 +225,7 @@ body {
 
 .room-available-container{
   border: 2px solid blue;
+  /* max-height: 90%; */
 }
 
 .room-available{
