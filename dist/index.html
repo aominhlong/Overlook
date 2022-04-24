@@ -17,9 +17,9 @@
     <section class="login-capsule">
       <h2 class="login">Login</h2>
       <form class="login-area">
-        <input class="username" id="username" type="text" placeholder="Username">
+        <input class="username" id="username" type="text" placeholder="Username" minlength=9 maxlength=10>
           <label for="username" class="hidden">Username Input Field</label>
-        <input class="password" id="password" type="text" placeholder="Password">
+        <input class="password" id="password" type="text" placeholder="Password" minlength=12 maxlength=12>
           <label for="password" class="hidden">Password Input Field</label>
           <button class="login-btn">Login</button>
         </form>
@@ -31,11 +31,20 @@
   <section class="top-half">
     <section class="title-user-container">
       <section class="title-container">
-        <h1 class="title">Welcome to the Burrow</h1>
-        <h3 class="money-spent">Money Spent</h3>
+
+          <h1 class="title">Welcome to the Burrow</h1>
+          <section class="mini-title-capsule">
+            <h2 class="booking-title">Previously Booked</h2>
+            <h2 class="current-booking-title">Current Bookings</h2>
+          </section>
+ 
         <section class="bookings">
           <div class="pastBooked"></div>
-          <div class="currentBooking"></div>
+          <div class="currentBooking">
+            <div class="no-bookings">
+              You have no current bookings
+            </div>
+          </div>
         </section>
       </section>
     </section>
@@ -43,22 +52,40 @@
       <section class="user-info">
         <p class="customer-name">username</p>
         <p class="customer-id">user id</p>
+        <p class="money-spent">Money Spent</p>
       </section>
     </section>
   </section>
 
   <section class="bottom-half">
     <section class="booking-area">
-      <p>Search For</p>
+      <!-- <section class="book-for">
+        <p>Book for:</p>
+      </section> -->
       <section class="booking-input-container">
-        <input type="date" name="" value="" id="check-date">
+        <label for="checkDate" class="calendar">Choose Your Date:</label>
+        <input type="date" name="" value="" id="checkDate">
       </section>
-      <button class="check-date-btn">Check the date</button>
-      
+      <form class="room-type">
+        <select name="type" id="type-selection">
+          <option id="all">All options</option>
+          <option id="residential suite">residential suite</option>
+          <option id="suite">suite</option>
+          <option id="junior suite">junior suite</option>
+          <option id="single room">single room</option>
+        </select>
+        <button class="check-date-btn">Check the date</button>
+      </form>
     </section>
   </section>
   
-
+  <!-- Rooms available selection page -->
+<section class="rooms-available-page">
+  <h1 class="rooms-available-title">Rooms Available</h1>
+  <button class="go-home">Go Home</button>
+  <section class="room-available-container"></section>
+  <button class="go-home">Go Home</button>
+</section>
 
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>

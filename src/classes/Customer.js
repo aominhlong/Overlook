@@ -4,7 +4,6 @@ class Customer {
         this.id = customerData.id
         this.roomsBooked = []
         this.totalSpent = 0
-        // this.filteredRoomsAvailable = []
         this.roomsAvailable = hotel.roomsAvailable
         this.bookedRooms = hotel.roomsUnavailable
     }
