@@ -9,6 +9,12 @@ const currentBookings = document.querySelector('.current-bookings')
 const userArea = document.querySelector('.user-info')
 const calendar = document.querySelector('.calendar')
 const checkDateBtn = document.querySelector(".check-date-btn")
+const roomsAvailableSection = document.querySelector('.room-available-container')
+const roomsAvailablePage = document.querySelector('.rooms-available-page')
+const userName = document.querySelector('.customer-name')
+const customerId = document.querySelector('.customer-id')
+const moneySpent = document.querySelector('.money-spent')
+const pastBooked = document.querySelector('.pastBooked')
 
 // **login page selectors**
 const loginBtn = document.querySelector('.login-btn')
@@ -50,10 +56,6 @@ const getData = (id) => {
   })
 }
 
-const userName = document.querySelector('.customer-name')
-const customerId = document.querySelector('.customer-id')
-const moneySpent = document.querySelector('.money-spent')
-const pastBooked = document.querySelector('.pastBooked')
 
 const populateBookingArea = () => {
   customer.findRoomsBooked(bookingsData)
@@ -72,20 +74,12 @@ const populateBookingArea = () => {
   })
 }
 
-//On login button click, invoke function to fetch
-//all data, pass in argument as user number
-
-
-
 
 // ***** ON WINDOW LOAD *****
 window.addEventListener('load', () => {
     hideAll([topHalf, bottomHalf, roomsAvailablePage])
 })
 
-
-const roomsAvailableSection = document.querySelector('.room-available-container')
-const roomsAvailablePage = document.querySelector('.rooms-available-page')
 
 // ***** LOGIN PAGE *****
 checkDateBtn.addEventListener('click', (event) => {
@@ -142,7 +136,6 @@ goHome.addEventListener('click', () => {
 })
 
 
-
 loginBtn.addEventListener('click', (event) => {
     event.preventDefault()
     hideAll([loginPage])
@@ -162,8 +155,6 @@ let findUserLoginId = (customer) => {
 // FIX LOGIN
 
 
-
-
 // ***** DASHBOARD *****
 const hideAll = (array) => {
   array.forEach((element) => {
@@ -171,12 +162,12 @@ const hideAll = (array) => {
   })
 }
 
+
 const showAll = (array) => {
   array.forEach((element) => {
     element.classList.remove("hidden")
   })
 }
-
 
 
 //Post request
@@ -212,19 +203,8 @@ const postRequest = (event) => {
     getData(parseInt(customerId.innerText.match(/\d+/)[0]))
     showAll([topHalf, bottomHalf])
     hideAll([roomsAvailablePage])
-    // title.innerText = "Booking confirmed. Enjoy your next stay!"
   })
 }
-
-const title = document.querySelector('.title')
-
-
-
-
-
-
-
-
 
 
 // Do not delete or rename this file ********
@@ -232,6 +212,7 @@ const title = document.querySelector('.title')
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
+
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
