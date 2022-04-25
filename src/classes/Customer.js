@@ -32,8 +32,6 @@ class Customer {
         }, 0)
     }
 
-    
-
 }
 
 export default Customer 
