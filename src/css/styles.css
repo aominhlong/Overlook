@@ -13,6 +13,10 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .greeting{
@@ -24,15 +28,23 @@ body {
   align-items: center;
 }
 
+.login{
+  text-shadow: 2px 2px #4a4848;
+}
+
 .login-title{
   /* border: 2px solid blue; */
   font-size: 100px;
+  text-shadow: 2px 2px #4a4848;
   text-align: center;
+  size: 5em;
 }
 
 .slogan{
   /* border: 2px solid red; */
+  margin: 0;
   font-size: 30px;
+  text-shadow: 2px 2px #000000;
 }
 
 .login-capsule{
@@ -68,7 +80,8 @@ body {
 }
 
 .login-error{
-  /* color: red; */
+  color: rgb(205, 26, 26);
+  text-shadow: 1.5px 1px #000000;
 }
 
 
@@ -77,7 +90,6 @@ body {
 /* ******Main Dashboard****** */
 
 .title-user-container{
-  /* border: 1px solid grey; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,7 +100,6 @@ body {
 
 
 .title-container{
-  /* border: 2px solid purple; */
   height: 100%;
 }
 
@@ -96,14 +107,30 @@ body {
   border: 2px solid red;
 }
 
+.login-title, 
 .title{
-  /* border: 2px solid red; */
-  /* color: rgb(255,254,255); */
+  color: rgb(255,254,255);
   font-size: 5em;
 }
 
+.login,
+.slogan{
+  color: rgb(255,254,255); 
+}
+
+.login-capsule{
+  margin: 10%;
+  width: 40%;
+  height: 30%;
+  background-color: rgb(170, 168, 168, 0.8);
+}
+
+.login{
+  margin: 5%;
+  outline-color: black;
+}
+
 .mini-title-capsule{
-  /* border: 2px solid red; */
   width: 100%;
   display: flex;
   justify-content: space-around;
@@ -111,12 +138,10 @@ body {
 }
 
 .money-spent{
-  /* border: 2px solid green; */
   text-align: center;
 }
 
 .bookings{
-  /* border: 2px solid blue; */
   width: 100%;
   display: flex;
   max-height: 35%;
@@ -126,6 +151,7 @@ body {
 .pastBooked,
 .currentBooking{
   border: 1px solid grey;
+  background-color: rgb(170, 168, 168, 0.8);
   text-align: center;
   margin: 0;
   width: 40%;
@@ -142,13 +168,12 @@ body {
 }
 
 .roomBooked {
-  border: 1px solid rgb(160, 160, 160);
+
   margin: 3px;
-  justify-content: space-between;
+ 
 }
 
 .top-half{
-  /* border: 2px solid red; */
   display: flex;
   height: 60%;
 
@@ -157,18 +182,14 @@ body {
 .user-booking-area{
   display: flex;
   flex-direction: column;
-  border: 1px solid grey;
   width: 10%;
 }
 
 .user-info{
-  /* color: rgb(255,254,255); */
-  margin-top: 4%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center
-  ;
+  justify-content: center;
 }
 
 .my-bookings{
@@ -180,25 +201,29 @@ body {
 /* ---------------- */
 
 .bottom-half{
-  /* border: 2px solid orange; */
   height: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* gap: 20px; */
+}
+
+.calendar{
+  color: #ffffff;
+  text-shadow: 1.5px 1.5px #191919;
 }
 
 .booking-area{
-  border: 2px solid green;
+  background-color: #2D455D;
+  opacity: 0.9;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 4px;
   width: 80%;
   height: 60%;
 }
 
 .book-for{
-  /* border: 2px solid red; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -207,16 +232,17 @@ body {
 
 /* Rooms available page */
 .rooms-available-page{
-  /* border: 2px solid red; */
-  height: 90%;
+  height: 100%;
   overflow-y: auto;
   scrollbar-width: thin;
   margin: 0;
 }
 
 .rooms-available-title{
-  border: 2px solid green;
-  height: 40%;
+  color: rgb(255,254,255);
+  text-shadow: 1.5px 1.5px #191919;
+  height: 15%;
+  margin: 0;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -224,19 +250,77 @@ body {
 }
 
 .room-available-container{
-  border: 2px solid blue;
-  /* max-height: 90%; */
+  border-top: 1px solid rgba(9, 29, 49, 0.5);
 }
 
+
+.roomBooked,
 .room-available{
-  /* border: 2px solid orange; */
-  margin: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(255,254,255);
+  background-color: rgb(45,69,93, 0.9);
+  border: 1px solid rgb(45,69,93);
+  height: 20%;
+  margin: 2.5em;
 }
+
 
 #type-selection{
   margin: 1em;
 }
 
+.booking-title,
+.current-booking-title{
+  color: rgb(255,254,255);
+  text-shadow: 2px 1.5px #191919;
+  background-color: rgb(45,69,93, 0.3);
+  width: 9em;
+}
+
+.title{
+  text-shadow: 2px 2px #4a4848;
+}
+
+.customer-name,
+.customer-id,
+.money-spent{
+  border-bottom: 1px solid grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0%;
+  height: 4em;
+  color: rgb(255,254,255);
+  text-shadow: 1px 1px #4a4848;
+  background: rgb(45,69,93, 0.9);
+}
+
+.go-back{
+  width: 8em;
+  height: 4em;
+}
+
+.login-btn{
+  height: 3em;
+}
+
 .hidden {
   display: none;
+}
+
+.confirm-message{
+  text-align: center;
+  color: rgb(255,254,255);
+  text-shadow: 1.5px 1.5px #302f2f;
+  background:rgba(13, 69, 124, 0.5)
+}
+
+.error-page{
+  height: 100%;
+  width: 100%;
+  background: white;
+  margin: 0;
 }

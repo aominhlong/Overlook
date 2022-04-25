@@ -3,11 +3,9 @@ import { specificUserData, allCustomersData, allRoomsData, allBookingsData } fro
 import Hotel from './classes/Hotel'
 import Customer from './classes/Customer'
 
+// ***** QUERY SELECTORS *****
 const topHalf = document.querySelector('.top-half')
 const bottomHalf = document.querySelector('.bottom-half')
-const currentBookings = document.querySelector('.current-bookings')
-const userArea = document.querySelector('.user-info')
-const calendar = document.querySelector('.calendar')
 const checkDateBtn = document.querySelector(".check-date-btn")
 const roomsAvailableSection = document.querySelector('.room-available-container')
 const roomsAvailablePage = document.querySelector('.rooms-available-page')
@@ -18,20 +16,20 @@ const pastBooked = document.querySelector('.pastBooked')
 const currentBooking = document.querySelector('.currentBooking')
 const noBookingParagraph = document.querySelector('.no-bookings')
 const cal = document.querySelector('#calen')
-const roomsAvailable = document.querySelector('.room-available')
 const goHome = document.querySelector('.go-home')
-
-// **login page selectors**
+const noDateErrorMessage = document.querySelector('.error-no-date-chosen')
+const confirmMessage = document.querySelector('.confirm-message')
 const loginBtn = document.querySelector('.login-btn')
 const loginPage = document.querySelector('.login-page')
-const dashboardTitle = document.querySelector('.title')
 const username = document.querySelector('input[type="text"]')
 const password = document.querySelector('.password')
-
-// **filter dates**
+const loginErrorMsg = document.querySelector('.login-error')
 const selectRoomType = document.querySelector('#type-selection')
 const date = document.querySelector('input[type="date"]')
+const errorPage = document.querySelector('.error-page')
+const roomAvailableTitle = document.querySelector('.rooms-available-title')
 
+// ***** GLOBAL VARIABLES *****
 let allData = []
 let hotel;
 let customer;
@@ -40,6 +38,33 @@ let roomsData;
 let customers;
 
 
+// ***** EVENT LISTENERS *****
+window.addEventListener('load', () => {
+  hideAll([topHalf, bottomHalf, roomsAvailablePage])
+})
+
+roomsAvailablePage.addEventListener('click', (event) => {
+  confirmRoom(event)
+})
+
+checkDateBtn.addEventListener('click', (event) => {
+  event.preventDefault()
+  checkCalendarValue()
+  noRoomsAvailable()
+})
+
+loginBtn.addEventListener('click', (event) => {
+  event.preventDefault()
+  checkLogin()
+})
+
+goHome.addEventListener('click', () => {
+  showAll([topHalf, bottomHalf])
+  hideAll([roomsAvailablePage])
+  reDisplayRoomTitle()
+})
+
+// ***** FETCH DATA *****
 const getData = (id) => {
   return Promise.all([
     specificUserData(id),
@@ -59,32 +84,31 @@ const getData = (id) => {
     hotel = new Hotel(roomsData, allData[1], bookingsData)
     customer = new Customer(allData[0], hotel)
     findUserLoginId(customers)
-    // console.log('fetch', customers)
     populateBookingArea()
+  })
+  .catch(err => {
+    hideAll([topHalf, bottomHalf, roomsAvailablePage, loginPage])
+    showAll([errorPage])
   })
 }
 
 
-const populateBookingArea = () => {
-  customer.findRoomsBooked(bookingsData)
-  customer.findMoneySpent(roomsData)
-  userName.innerText = customer.name
-  customerId.innerText = `id: ${customer.id}`
-  moneySpent.innerText = `Total Spent: $${customer.totalSpent.toFixed(2)}`
+// ***** DASHBOARD *****
+const populateBookingInformation = () => {
   customer.roomsBooked.forEach((roomBooked) => {
     pastBooked.innerHTML += `
-    <section class="roomBooked">
-    date: ${roomBooked.date}
-    <br>
-    room Number: ${roomBooked.roomNumber}
+    <section tabindex='0' class="roomBooked">
+      date: ${roomBooked.date}
+      <br>
+      room Number: ${roomBooked.roomNumber}
     </section>`
   
     if(roomBooked.date >= setCurrentDay('/')) {
       currentBooking.innerHTML += `
-        <section class="roomBooked">
-        date: ${roomBooked.date}
-        <br>
-        room Number: ${roomBooked.roomNumber}
+        <section tabindex='0' class="roomBooked">
+          date: ${roomBooked.date}
+          <br>
+          room Number: ${roomBooked.roomNumber}
         </section>`
     }
       if (bookingsData.length > 1008) {
@@ -93,133 +117,118 @@ const populateBookingArea = () => {
   })
 }
 
+const populateBookingArea = () => {
+  customer.findRoomsBooked(bookingsData)
+  customer.findMoneySpent(roomsData)
+  userName.innerText = customer.name
+  customerId.innerText = `id: ${customer.id}`
+  moneySpent.innerText = `Total Spent: $${customer.totalSpent.toFixed(2)}`
+  populateBookingInformation()
+}
 
+const populateAvailableOne = () => {
+  hotel.filterRoomsByDate(date.value).forEach((room) => {
+    roomsAvailableSection.innerHTML += `
+    <section tabindex='0' class="room-available">
+      <section class="room">
+        Room Number: ${room.number}
+        <br>
+        Room Type: ${room.roomType}
+        <br>
+        Bed Size: ${room.bedSize}
+        <br>
+        Beds: ${room.numBeds}
+        <br>
+        Price Per Night: ${room.costPerNight}
+      </section>
+      <button class="button" id="${room.number}">Book Now</button>
+    </section>
+    `
+  })
+}
 
-// ***** ON WINDOW LOAD *****
-window.addEventListener('load', () => {
-    hideAll([topHalf, bottomHalf, roomsAvailablePage])
-})
+const populateAvailableTwo = () => {
+  hotel.filterRoomsByBoth(date.value, selectRoomType.value).forEach((room) => {
+    roomsAvailableSection.innerHTML += `
+    <section tabindex='0' class="room-available">
+      <section class="room">
+        Room Number: ${room.number}
+        <br>
+        Room Type: ${room.roomType}
+        <br>
+        Bed Size: ${room.bedSize}
+        <br>
+        Beds: ${room.numBeds}
+        <br>
+        Price Per Night: ${room.costPerNight}
+      </section>
+      <button class="button" id="${room.number}">Book Now</button>
+    </section>
+    `
+  })
+}
 
-const test = document.querySelector('.error-no-date-chosen')
+const populateAvailablePage = () => {
+  roomsAvailableSection.innerHTML = ''
+  if (selectRoomType.value === 'All options') {
+    populateAvailableOne()
+  } else {
+    populateAvailableTwo()
+  }
+  hideAll([topHalf, bottomHalf])
+  showAll([roomsAvailablePage])
+}
 
-// ***** LOGIN PAGE *****
-checkDateBtn.addEventListener('click', (event) => {
-  event.preventDefault()
-
+const checkCalendarValue = () => {
   if (cal.value === '') {
-    showAll([test])
+    showAll([noDateErrorMessage])
     setTimeout(() => {
-      hideAll([test])
+      hideAll([noDateErrorMessage])
     }, 3000)
     return
-  }
-
-  roomsAvailableSection.innerHTML = ''
-    if (selectRoomType.value === 'All options') {
-      hotel.filterRoomsByDate(date.value).forEach((room) => {
-        roomsAvailableSection.innerHTML += `
-        <section class="room-available">
-          <section class="room">
-            Room Number: ${room.number}
-            <br>
-            Room Type: ${room.roomType}
-            <br>
-            Bed Size: ${room.bedSize}
-            <br>
-            Beds: ${room.numBeds}
-            <br>
-            Price Per Night: ${room.costPerNight}
-          </section>
-          <button class="button" id="${room.number}">Book Now</button>
-        </section>
-        `
-      })
-    hideAll([topHalf, bottomHalf])
   } else {
-    hotel.filterRoomsByDate(date.value, selectRoomType.value).forEach((room) => {
-      roomsAvailableSection.innerHTML += `
-      <section class="room-available">
-        <section class="room">
-          Room Number: ${room.number}
-          <br>
-          Room Type: ${room.roomType}
-          <br>
-          Bed Size: ${room.bedSize}
-          <br>
-          Beds: ${room.numBeds}
-          <br>
-          Price Per Night: ${room.costPerNight}
-        </section>
-        <button class="button" id="${room.number}">Book Now</button>
-      </section>
-      `
-    })
+    populateAvailablePage()
   }
-  showAll([roomsAvailablePage])
-})
+}
 
 
+// ***** LOGIN PAGE *****
+const checkLogin = () => {
+  if (findUserLoginId() !== undefined) {
+    hideAll([loginPage, loginErrorMsg])
+    showAll([topHalf, bottomHalf])
+    getData(parseInt(findUserLoginId()[0]))
+    findUserLoginId()
+  } else {
+    showAll([loginErrorMsg])
+  }
+  cal.min = setCurrentDay('-')
+}
 
-goHome.addEventListener('click', () => {
-  showAll([topHalf, bottomHalf])
-  hideAll([roomsAvailablePage])
-})
-
-const loginErrorMsg = document.querySelector('.login-error')
-
-loginBtn.addEventListener('click', (event) => {
-    event.preventDefault()
-    if (findUserLoginId() !== undefined) {
-      hideAll([loginPage, loginErrorMsg])
-      showAll([topHalf, bottomHalf])
-      console.log('here', findUserLoginId())
-      getData(parseInt(findUserLoginId()[0]))
-      findUserLoginId()
-    } else {
-      showAll([loginErrorMsg])
-    }
-    cal.min = setCurrentDay('/')
-
-})
-
-
-
-let findUserLoginId = (customers) => {
+const findUserLoginId = (customers) => {
   let userLogin = username.value
   let matchNum = userLogin.match(/\d+/)[0]
   let passwordLogin = password.value
  
-  if (userLogin.includes('customer') && matchNum && passwordLogin === 'overlook2021') {
+  if (userLogin.includes('customer') && userLogin[8] !== '0' && matchNum && passwordLogin === 'overlook2021') {
     return matchNum
   }
-
-}
-// FIX LOGIN
-
-
-// ***** DASHBOARD *****
-const hideAll = (array) => {
-  array.forEach((element) => {
-    element.classList.add("hidden")
-  })
 }
 
 
-const showAll = (array) => {
-  array.forEach((element) => {
-    element.classList.remove("hidden")
-  })
-}
-
-
-//Post request
-roomsAvailablePage.addEventListener('click', (event) => {
+// ***** CONFIRM ROOM MESSAGE *****
+const confirmRoom = (event) => {
   if (event.target.className === 'button') {
     postRequest(event)
+    showAll([confirmMessage])
+    setTimeout(() => {
+      hideAll([confirmMessage])
+    }, 4000)
   }
-})
+}
 
 
+// ***** POST REQUEST *****
 const postRequest = (event) => {
   let postDate = date.value.split('-').join('/')
 
@@ -243,36 +252,51 @@ const postRequest = (event) => {
     })
   })
   .then(show => {
-    getData(parseInt(customerId.innerText.match(/\d+/)[0]))
-    showAll([topHalf, bottomHalf])
-    hideAll([roomsAvailablePage, noBookingParagraph])
-    
-    currentBooking.innerHTML = ''
-  
-    
+    repopulatePage()
   })
-  
+}
+
+const repopulatePage = () => {
+  getData(parseInt(customerId.innerText.match(/\d+/)[0]))
+  showAll([topHalf, bottomHalf])
+  hideAll([roomsAvailablePage, noBookingParagraph])
+  currentBooking.innerHTML = ''
 }
 
 
-
-
+// ***** OTHER FUNCTIONS *****
 const setCurrentDay = (sp) => {
   let today = new Date();
   let dd = today.getDate();
-  let mm = today.getMonth()+1; //As January is 0.
+  let mm = today.getMonth()+1; 
   let yyyy = today.getFullYear();
-  
+
   if(dd<10) dd='0'+dd;
   if(mm<10) mm='0'+mm;
   return (yyyy+sp+mm+sp+dd);
   };
 
-
-
-
-
-
+  const hideAll = (array) => {
+    array.forEach((element) => {
+      element.classList.add("hidden")
+    })
+  }
+  
+  const showAll = (array) => {
+    array.forEach((element) => {
+      element.classList.remove("hidden")
+    })
+  }
+  
+  const reDisplayRoomTitle = () => {
+    roomAvailableTitle.innerText = 'Rooms Available'
+  }
+  
+  const noRoomsAvailable = () => {
+    if (roomsAvailableSection.children.length === 0) {
+      roomAvailableTitle.innerText = 'Sorry! No rooms are available for this date.'
+    }
+  }
 
 
 
@@ -285,5 +309,5 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
-import './images/hotel.png'
+
 

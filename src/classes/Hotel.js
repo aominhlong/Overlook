@@ -18,9 +18,9 @@ class Hotel {
     filterRoomsByDate(date) {
         let filteredRoomsAvailable = []
         this.unbookedRooms = []
-
+       
         this.roomsAvailable.forEach((room) => filteredRoomsAvailable.push(room))
-
+        
         let filterBookings = this.roomsUnavailable.filter((booking) => {
             return booking.date === date.split('-').join('/')
         })
@@ -38,13 +38,14 @@ class Hotel {
 
     filterRoomsByBoth(date, roomType) {
         let filteredRoomsAvailable = []
+      
         this.roomsAvailable.forEach((room) => filteredRoomsAvailable.push(room))
+       
         let filterBookings = this.roomsUnavailable.filter((booking) => {
             return booking.date === date.split('-').join('/')
         })
-
+        filterBookings.forEach((booking) => {
         filteredRoomsAvailable.forEach((room, index) => {
-            filterBookings.forEach((booking) => {
                 if (room.number === booking.roomNumber) {
                     filteredRoomsAvailable.splice(index, 1)
                 }
