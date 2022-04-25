@@ -3,7 +3,7 @@ class Hotel {
         this.customerList = customerData;
         this.roomsAvailable = roomsData
         this.roomsUnavailable = bookingsData
-        this.filteredRooms;
+        this.filteredRoomsAvailable = []
         this.unbookedRooms = []
     }
     

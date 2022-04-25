@@ -1,7 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
 import { customerData, bookingsSampleData, roomsSampleData } from './test-data';
-import Customer from '../src/classes/Customer';
 import Hotel from '../src/classes/Hotel';
 
 describe('Hotel', () => {
@@ -47,9 +46,9 @@ describe('Hotel', () => {
     })
 
     it('Should filter a room by date', () => {
-        hotel.filterRoomsByDate('2022/08/13')
+        hotel.filterRoomsByDate('2022-08-13')
 
-        expect(hotel.filteredRoomsAvailable).to.deep.equal([
+        expect(hotel.filterRoomsByDate('2022-08-13')).to.deep.equal([
             {
                 number: 5,
                 roomType: 'single room',
@@ -67,14 +66,21 @@ describe('Hotel', () => {
                 costPerNight: 397.02
               }
         ])
-
     })
 
-    it('Should apologize if there are no rooms available on the specific date', () => {
-        hotel.filterRoomsByDate('2020/09/13')
-        expect(hotel.filterRoomsByDate()).to.equal('We are so sorry. It looks like there are no rooms currently available on this date.')
+    it('Should be able to filter rooms available by both the date and roomType', () => {
+        hotel.filterRoomsByBoth('2022-08-13', 'single room')
+
+        expect(hotel.filterRoomsByBoth('2022-08-13', 'single room')).to.deep.equal([
+            {
+                number: 5,
+                roomType: 'single room',
+                bidet: true,
+                bedSize: 'queen',
+                numBeds: 2,
+                costPerNight: 340.17
+              }
+        ])
     })
-
-
 
 })

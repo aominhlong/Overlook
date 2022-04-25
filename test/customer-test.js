@@ -74,7 +74,4 @@ describe('Customer', () => {
         expect(customer2.totalSpent).to.equal(840.34)
     })
 
-
-
-
 })
