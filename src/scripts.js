@@ -39,6 +39,7 @@ let bookingsData;
 let roomsData;
 let customers;
 
+
 const getData = (id) => {
   return Promise.all([
     specificUserData(id),
@@ -55,9 +56,10 @@ const getData = (id) => {
     bookingsData = allData[3].bookings
     roomsData = allData[2].rooms
     customers = allData[1].customers
-    findUserLoginId(customers)
     hotel = new Hotel(roomsData, allData[1], bookingsData)
     customer = new Customer(allData[0], hotel)
+    findUserLoginId(customers)
+    // console.log('fetch', customers)
     populateBookingArea()
   })
 }
@@ -69,7 +71,6 @@ const populateBookingArea = () => {
   userName.innerText = customer.name
   customerId.innerText = `id: ${customer.id}`
   moneySpent.innerText = `Total Spent: $${customer.totalSpent.toFixed(2)}`
-  console.log('first', customer.roomsBooked)
   customer.roomsBooked.forEach((roomBooked) => {
     pastBooked.innerHTML += `
     <section class="roomBooked">
@@ -79,7 +80,6 @@ const populateBookingArea = () => {
     </section>`
   
     if(roomBooked.date >= setCurrentDay('/')) {
-      console.log('hi')
       currentBooking.innerHTML += `
         <section class="roomBooked">
         date: ${roomBooked.date}
@@ -87,6 +87,9 @@ const populateBookingArea = () => {
         room Number: ${roomBooked.roomNumber}
         </section>`
     }
+      if (bookingsData.length > 1008) {
+        hideAll([noBookingParagraph])
+      }
   })
 }
 
@@ -162,35 +165,34 @@ goHome.addEventListener('click', () => {
   hideAll([roomsAvailablePage])
 })
 
+const loginErrorMsg = document.querySelector('.login-error')
 
 loginBtn.addEventListener('click', (event) => {
     event.preventDefault()
-    hideAll([loginPage])
-    showAll([topHalf, bottomHalf])
-    getData(parseInt(findUserLoginId()[0]))
-    findUserLoginId()
-
-
+    if (findUserLoginId() !== undefined) {
+      hideAll([loginPage, loginErrorMsg])
+      showAll([topHalf, bottomHalf])
+      console.log('here', findUserLoginId())
+      getData(parseInt(findUserLoginId()[0]))
+      findUserLoginId()
+    } else {
+      showAll([loginErrorMsg])
+    }
     cal.min = setCurrentDay('/')
 
-    let test2 = document.querySelector('.test')
-
-    if(currentBooking.contains(roomsAvailable)) {
-      noBookingParagraph.removeChild(noBookingParagraph.firstChild)
-    }
 })
 
 
+
 let findUserLoginId = (customers) => {
-  
   let userLogin = username.value
+  let matchNum = userLogin.match(/\d+/)[0]
   let passwordLogin = password.value
-  console.log('hi', userLogin)
-  console.log('password', passwordLogin)
-  let matchNum = userLogin.match(/\d+/)
-  if (matchNum) {
+ 
+  if (userLogin.includes('customer') && matchNum && passwordLogin === 'overlook2021') {
     return matchNum
   }
+
 }
 // FIX LOGIN
 
@@ -216,7 +218,6 @@ roomsAvailablePage.addEventListener('click', (event) => {
     postRequest(event)
   }
 })
-
 
 
 const postRequest = (event) => {
@@ -247,6 +248,7 @@ const postRequest = (event) => {
     hideAll([roomsAvailablePage, noBookingParagraph])
     
     currentBooking.innerHTML = ''
+  
     
   })
   
