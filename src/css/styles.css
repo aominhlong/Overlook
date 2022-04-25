@@ -80,8 +80,8 @@ body {
 }
 
 .login-error{
-  color: rgb(205, 26, 26);
-  text-shadow: 1.5px 1px #000000;
+  color: rgb(78, 10, 10);
+  text-shadow: 1px 1px #000000;
 }
 
 
@@ -323,4 +323,8 @@ body {
   width: 100%;
   background: white;
   margin: 0;
+}
+
+.error-no-date-chosen{
+  color:rgb(235, 113, 113);
 }
