@@ -1,100 +1,133 @@
-# Webpack Starter Kit
+# Overlook
 
-## Clone This Repo
+Overlook is a hotel management tool for hotel customers and staff to manage the room bookings and calculate the customer bills. In order to use the app, users and managers must have an account. 
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+### **Downloading the files**
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+Link #1: OverLook Application [link](https://github.com/aominhlong/Overlook)
 
-Now try to commit something (just add a line in the README) and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+Link #2: Overlook Web Api [link](https://github.com/turingschool-examples/overlook-api)
 
-## Setup
+1. Click on the first link above
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo.
+2. hit this green box that says `Code`
 
-Then install the library dependencies. Run:
+![Click on the Green Box](https://user-images.githubusercontent.com/89413678/165207496-db5b241d-438d-453c-b41a-8c8a9123b62c.png)
 
-```bash
-npm install
-```
+3. Copy the SSH
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with the Turing logo image and a beautiful gradient background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+![Copy the SSH](https://user-images.githubusercontent.com/89413678/165207506-a40a0b1e-7841-4f1a-a0e6-cabbb85866de.png)
 
-## Where to Add Your Code
+4. Open the terminal
+5. Type `git clone` + paste the SSH link
 
-### JavaScript
+<img width="919" alt="Clone down" src="https://user-images.githubusercontent.com/89413678/165208213-5dc3b74e-4846-4552-bd74-0e5902007fcf.png">
 
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
+6. Repeat the steps above for the second link
 
-**Create all of your feature code files in the `src` directory.**
 
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
+### **To Run the Application and View the Webpage**
 
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
+1. In the main-directory of Overlook, run `npm start`
 
-### HTML
+2. In the main-directory of Overlook-api, run `npm start`
 
-Add the HTML you need in the `index.html` file in the `./dist` directory. There is some boilerplate HTML that exists from the start that you can modify.
+An example of `npm start` in the Overlook main directory is below:
 
-### Images
+![npm start](https://user-images.githubusercontent.com/89413678/165208767-4478c191-4e06-4792-b1e6-9e768e0c4b0d.gif)
 
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`scripts.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
+3. Copy the link of the host for the app and paste it into the web browser to view the app
 
-## How to View Your Code in Action
+<img width="1060" alt="Screen Shot 2022-04-25 at 8 49 08 PM" src="https://user-images.githubusercontent.com/89413678/165210094-4e205a44-0bf9-4256-8d0f-2b3a440b0005.png">
 
-In the terminal, run:
+![Paste Local Host](https://user-images.githubusercontent.com/89413678/165210384-d384bee8-a2e2-4fc6-b8a3-c06020f29765.gif)
 
-```bash
-npm start
-```
 
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
+### **Using the Application**
 
-```bash
-Project is running at http://localhost:8080/
-```
+**_To Login_**
 
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
+To login, the user will need to type in their username and password. 
+![Login](https://user-images.githubusercontent.com/89413678/165212931-c0ed3db0-8052-4241-817e-faf3165a4250.gif)
 
----
+If the username or password is incorrect, an error message will show. 
 
-## Test Files Organization
+![Login Error](https://user-images.githubusercontent.com/89413678/165213277-554183ea-eda2-4b83-a924-1159b61fccb1.png)
 
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
 
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
+**_User Dashboard_**
 
-## Running Your Tests
+When users login, they are taken to their dashboard. Here, they can see:
+- Name
+- ID
+- Total money spent
+- Previous room bookings
+- Current room bookings
 
-Run your test suite using the command:
+![User Dashboard](https://user-images.githubusercontent.com/89413678/165214022-f688f6b7-c716-4819-9a36-773b6a843db2.png)
 
-```bash
-npm test
-```
+Users are also able to make another booking in the future from their dashboard. 
 
-The test results will output to the terminal.
+**_To look for rooms to book_**
 
----
+To begin looking for rooms to book, users can go down to the navy blue box below, and click on the calendar icon and pick a date that they want to look for rooms. They also have an option to filter the rooms by the room type: all options, residential suite, suite, junior suite, or a single room. Clicking `Check the date` will bring them to a page that shows all available days for that date. 
 
-## Linting Your Code
+![Choose a date](https://user-images.githubusercontent.com/89413678/165215565-d9b1782e-66c6-4072-a52c-ef66e682ad29.gif)
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
+**_Booking a room_**
 
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory.
+After selecting a date, users are taken to a new page that shows all rooms that are available. When users see a room they like, they can click on the button `Book Now` and it will book their room for them. A confirmation message will display as well as the the room being placed in their current bookings section. 
 
-## Webpack?
+![Booking room confirmation](https://user-images.githubusercontent.com/89413678/165216520-e827dee7-6165-46fb-8e57-f432e954ab96.gif)
 
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
+If there are no rooms available for that date, `Sorry! No rooms are available for this date.` will display above. The user can click the `Go Back` button located at the top left of the window to go back to their dashboard to choose another date or room type. 
 
-## Deploying to GitHub Pages
+![No rooms available and go back](https://user-images.githubusercontent.com/89413678/165216940-0efc5c7e-1f88-4487-9a76-0f1fb3d530a3.gif)
 
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
+### **To Close Down the Application**
 
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
+In the terminal where the app and server is running, use `control` + `c` to stop both the application and the application's server.
 
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+### **Accessibility**
 
+Lighthouse was used to evaluate the app for accessibility. 
+
+![Lighthouse Test](https://user-images.githubusercontent.com/89413678/165209632-7748c049-96bd-40e9-8fe6-f46e26990cd2.png)
+
+### **Technologies Used**
+- JavaScript
+- Mocha
+- Chai
+- Webpack
+- CSS
+- HTML
+
+
+### **Challenges**
+- I had my fetch calls working but to post the data, I had to make sure the format matched what was there. I also had to make sure numbers are numbers instead of strings when I post the data. 
+
+- Solving one bug made two more bugs appear.
+
+- My filter by date was not working properly because it was splicing out both from both the array I made and the original data. 
+
+- I iterated over the wrong item in one instance. 
+
+
+### **Wins**
+- My fetch and posts worked really well!
+
+- I fixed the third challenge by pushing the information from the original array instead of setting it equal to each other.
+
+- Accessibility reached 100%
+
+
+### **Contributors**
+- Nicholas Ao [GitHub](https://github.com/aominhlong)
+
+
+### **Future Additions**
+- Make a manager class
+
+- Allow users to remove bookings
+
+- Customers can only book a year in advance
