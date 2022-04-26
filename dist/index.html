@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Burrow</title>
 </head>
-<body class='body' background="https://wallpapersdsc.net/wp-content/uploads/2017/04/Hotel-Photos.jpg">
+<body background="https://wallpapersdsc.net/wp-content/uploads/2017/04/Hotel-Photos.jpg" aria-label="Poolside view of a sunset at a resort in the evening">
 
   <!-- LOGIN DISPLAY -->
   <section class="login-page">
@@ -17,12 +17,12 @@
       <h2 class="login" tabindex='0'>Login</h2>
       <form class="login-area">
         <input class="username" id="username" type="text" placeholder="Username" minlength=9 maxlength=10>
-          <label for="username" class="hidden">Username Input Field</label>
+        <label for="username" class="hidden">Username Input Field</label>
         <input class="password" id="password" type="text" placeholder="Password">
-          <label for="password" class="hidden">Password Input Field</label>
-          <button class="login-btn">Login</button>
-        </form>
-        <p class="login-error hidden">Login not found. Please try again</p>
+        <label for="password" class="hidden">Password Input Field</label>
+        <button class="login-btn">Login</button>
+      </form>
+      <p class="login-error hidden">Login not found. Please try again.</p>
     </section>
   </section>
 
@@ -30,14 +30,12 @@
   <section class="top-half">
     <section class="title-user-container">
       <section class="title-container">
-
           <h1 class="title" aria-label="Welcome to the Burrow Homepage" tabindex='0'>Welcome to the Burrow</h1>
           <h3 class="confirm-message hidden">Booking Confirmed! Enjoy your next stay!</h3>
           <section class="mini-title-capsule">
             <h2 class="booking-title" tabindex='0'>Previously Booked</h2>
             <h2 class="current-booking-title" tabindex='0'>Current Bookings</h2>
           </section>
- 
         <section class="bookings">
           <section class="pastBooked"></section>
           <section class="currentBooking">
@@ -56,7 +54,6 @@
       </section>
     </section>
   </section>
-
   <section class="bottom-half">
     <section class="booking-area">
       <section class="booking-input-container">
@@ -78,16 +75,16 @@
   </section>
   
   <!-- Rooms available selection page -->
-<section class="rooms-available-page">
-  <h1 class="rooms-available-title" tabindex='0'>Rooms Available</h1>
-  <button class="go-home">Go Back</button>
-  <section class="room-available-container"></section>
-</section>
+  <section class="rooms-available-page">
+    <h1 class="rooms-available-title" tabindex='0'>Rooms Available</h1>
+    <button class="go-home">Go Back</button>
+    <section class="room-available-container"></section>
+  </section>
 
-  <!-- Error page -->
-<section class="error-page hidden">
-  <h1>ERROR REFRESH PAGE AND TRY AGAIN</h1>
-</section>
+    <!-- Error page -->
+  <section class="error-page hidden">
+    <h1>ERROR REFRESH PAGE AND TRY AGAIN</h1>
+  </section>
 
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
