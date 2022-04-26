@@ -269,9 +269,14 @@ body {
 .booking-title,
 .current-booking-title{
   background-color: rgb(45,69,93, 0.5);
+  border-radius: 4px;
   color: rgb(255,254,255);
   text-shadow: 2px 1.5px #191919;
-  width: fit-content;
+  width: 8.5em;
+}
+
+.booking-title{
+  width: 9em;
 }
 
 .title{
