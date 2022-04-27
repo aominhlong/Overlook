@@ -40,7 +40,9 @@ let customers;
 
 // ***** EVENT LISTENERS *****
 window.addEventListener('load', () => {
-  hideAll([topHalf, bottomHalf, roomsAvailablePage])
+  // hideAll([topHalf, bottomHalf, roomsAvailablePage])
+  getData(15)
+  hideAll([loginPage, roomsAvailablePage])
 })
 
 roomsAvailablePage.addEventListener('click', (event) => {
@@ -83,13 +85,13 @@ const getData = (id) => {
     customers = allData[1].customers
     hotel = new Hotel(roomsData, allData[1], bookingsData)
     customer = new Customer(allData[0], hotel)
-    findUserLoginId(customers)
+    // findUserLoginId(customers)
     populateBookingArea()
   })
-  .catch(err => {
-    hideAll([topHalf, bottomHalf, roomsAvailablePage, loginPage])
-    showAll([errorPage])
-  })
+  // .catch(err => {
+  //   hideAll([topHalf, bottomHalf, roomsAvailablePage, loginPage])
+  //   showAll([errorPage])
+  // })
 }
 
 
