@@ -232,7 +232,7 @@ const confirmRoom = (event) => {
 const postRequest = (event) => {
   let postDate = date.value.split('-').join('/')
 
-  fetch(`http://localhost:3001/api/v1/bookings`, {
+  fetch(`https://overlook-api-na.herokuapp.com/api/v1/bookings`, {
     method: 'POST',
     body: JSON.stringify(
       { "userID": parseInt(customerId.innerText.match(/\d+/)[0]), 

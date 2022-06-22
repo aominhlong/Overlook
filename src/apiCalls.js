@@ -1,11 +1,11 @@
-let rooms = `http://localhost:3001/api/v1/rooms`
-let customers = `http://localhost:3001/api/v1/customers`
-let bookings = `http://localhost:3001/api/v1/bookings`
+let rooms = `https://overlook-api-na.herokuapp.com/api/v1/rooms`
+let customers = `https://overlook-api-na.herokuapp.com/api/v1/customers`
+let bookings = `https://overlook-api-na.herokuapp.com/api/v1/bookings`
 
 
 
 const specificUserData = (id) => {
-    return fetch(`http://localhost:3001/api/v1/customers/${id}`) //replace one with id and interpolate user login num
+    return fetch(`https://overlook-api-na.herokuapp.com/api/v1/customers/${id}`)
     .then(response => response.json())
     .catch(err => console.log('Error getting specific customer data'))
 }
