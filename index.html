@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Burrow</title>
+</head>
+<body background="https://wallpapersdsc.net/wp-content/uploads/2017/04/Hotel-Photos.jpg" aria-label="Poolside view of a sunset at a resort in the evening">
+
+  <!-- LOGIN DISPLAY -->
+  <section class="login-page">
+    <section class="greeting">
+      <h1 class="login-title" tabindex='0'>The Burrow</h1>
+    </section>
+    <section class="login-capsule">
+      <h2 class="login" tabindex='0'>Login</h2>
+      <form class="login-area">
+        <input class="username" id="username" type="text" placeholder="Username" minlength=9 maxlength=10>
+        <label for="username" class="hidden">Username Input Field</label>
+        <input class="password" id="password" type="text" placeholder="Password">
+        <label for="password" class="hidden">Password Input Field</label>
+        <button class="login-btn">Login</button>
+      </form>
+      <p class="login-error hidden">Login not found. Please try again.</p>
+    </section>
+  </section>
+
+  <!-- DASHBOARD DISPLAY -->
+  <section class="top-half">
+    <section class="title-user-container">
+      <section class="title-container">
+          <h1 class="title" aria-label="Welcome to the Burrow Homepage" tabindex='0'>Welcome to the Burrow</h1>
+          <h3 class="confirm-message hidden">Booking Confirmed! Enjoy your next stay!</h3>
+          <section class="mini-title-capsule">
+            <h2 class="booking-title" tabindex='0'>Previously Booked</h2>
+            <h2 class="current-booking-title" tabindex='0'>Current Bookings</h2>
+          </section>
+        <section class="bookings">
+          <section class="pastBooked"></section>
+          <section class="currentBooking">
+            <div class="no-bookings">
+              <p class="no-bookings">You have no current bookings</p>
+            </div>
+          </section>
+        </section>
+      </section>
+    </section>
+    <section class="user-booking-area">
+      <section class="user-info">
+        <p class="customer-name" tabindex='0'>username</p>
+        <p class="customer-id" tabindex='0'>user id</p>
+        <p class="money-spent" tabindex='0'>Money Spent</p>
+      </section>
+    </section>
+  </section>
+  <section class="bottom-half">
+    <section class="booking-area">
+      <section class="booking-input-container">
+        <label for="calen" class="calendar" tabindex='0'>Choose Your Date:</label>
+        <input id="calen" type="date" name="" value="" min="">
+      </section>
+      <p class="error-no-date-chosen hidden">Please choose a date</p>
+      <form class="room-type">
+        <select name="type" id="type-selection">
+          <option id="all">All options</option>
+          <option id="residential suite">residential suite</option> 
+          <option id="suite">suite</option>
+          <option id="junior suite">junior suite</option>
+          <option id="single room">single room</option>
+        </select>
+        <button class="check-date-btn">Check the date</button>
+      </form>
+    </section>
+  </section>
+  
+  <!-- Rooms available selection page -->
+  <section class="rooms-available-page">
+    <h1 class="rooms-available-title" tabindex='0'>Rooms Available</h1>
+    <button class="go-home">Go Back</button>
+    <section class="room-available-container"></section>
+  </section>
+
+    <!-- Error page -->
+  <section class="error-page hidden">
+    <h1>ERROR REFRESH PAGE AND TRY AGAIN</h1>
+  </section>
+
+  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+  <script src="bundle.js"></script>
+
+</body>
+</html>
